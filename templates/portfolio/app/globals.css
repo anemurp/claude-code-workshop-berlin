@@ -2,13 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #F2F2F2;
+  --text: #0F0F0F;
+  --card-bg: #ffffff;
+  --muted: #666666;
+  --accent: #0F0F0F;
+  --accent-coral: #E8612A;
+  --accent-cobalt: #1B2A6B;
+  --accent-teal: #1B6B6B;
+  --nav-bg: #ffffff;
+  --border: #e5e5e5;
+}
+
+.wild {
+  --bg: #F5EDD6;
+  --text: #0F0F0F;
+  --card-bg: #EDE4CC;
+  --muted: #666666;
+  --accent: #E8612A;
+  --accent-coral: #E8612A;
+  --accent-cobalt: #1B2A6B;
+  --accent-teal: #1B6B6B;
+  --nav-bg: #F5EDD6;
+  --border: #D4C5A9;
+}
+
+*, *::before, *::after {
+  transition: background-color 0.4s ease,
+              color 0.3s ease,
+              border-color 0.3s ease;
+}
+
 body {
-  @apply bg-paper;
+  background-color: var(--bg);
   font-family: Inter, ui-sans-serif, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.6;
-  color: #050505;
+  color: var(--text);
 }
 
 h1 {
@@ -17,7 +49,7 @@ h1 {
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.03em;
-  color: #050505;
+  color: var(--text);
   text-align: center;
 }
 
@@ -27,7 +59,12 @@ h2 {
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: #050505;
+  color: var(--text);
+}
+
+.wild h2 {
+  border-left: 3px solid var(--accent-coral);
+  padding-left: 12px;
 }
 
 p {
@@ -35,5 +72,5 @@ p {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.6;
-  color: #050505;
+  color: var(--text);
 }
