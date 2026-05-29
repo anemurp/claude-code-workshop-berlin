@@ -9,6 +9,7 @@
 export type CaseStudy = {
   slug: string;
   title: string;
+  company: string;
   year: string;
   description: string;
   thumbnail: string;
@@ -23,6 +24,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "tide-checkout",
     title: "Tide Checkout Redesign",
+    company: "Tide",
     year: "2024",
     description:
       "Reframed the onboarding flow around clarity over speed. Three rounds of usability testing, six prototypes, one launch — 34% improvement in completion.",
@@ -40,6 +42,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "gitlab-inline-review",
     title: "GitLab Inline Code Review",
+    company: "GitLab",
     year: "2022",
     description:
       "Designed the inline review pattern now used by 30+ million developers. Started as a hack-week prototype, became a flagship feature.",

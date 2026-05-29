@@ -8,8 +8,10 @@ export const hero = {
   name: "Anna Murphy",
   role: "Product Designer",
   location: "Berlin, Germany",
+  availability: "Senior UX & Product Designer · AI Enthusiast · SaaS, B2B2C",
+  tagline: "Design that turns complexity into clarity",
   headline:
-    "I help early-stage teams turn fuzzy ideas into shipping products. Currently designing checkout flows at a fintech startup.",
+    "Former teacher. Current designer. I understand how people learn, not just how they click.",
   ctaPrimary: { label: "See my work", href: "#work" },
   ctaSecondary: { label: "Get in touch", href: "#contact" },
 };
@@ -145,6 +147,24 @@ export const hackathonProjects = {
     },
   ],
 };
+
+export const tickerRow1 = [
+  { icon: "Users",   label: "Multi-user flows" },
+  { icon: "PenTool", label: "Content writing" },
+  { icon: "Layout",  label: "Product design" },
+  { icon: "Monitor", label: "UI/UX design" },
+  { icon: "Search",  label: "User research" },
+  { icon: "Layers",  label: "Prototyping" },
+];
+
+export const tickerRow2 = [
+  { icon: "Smartphone", label: "Mobile apps" },
+  { icon: "Eye",        label: "WCAG accessibility" },
+  { icon: "Asterisk",   label: "Adaptive Systems" },
+  { icon: "BarChart2",  label: "Dashboards" },
+  { icon: "Cpu",        label: "AI products" },
+  { icon: "Globe",      label: "Design systems" },
+];
 
 export const meta = {
   title: "Anna Murphy — Product Designer",

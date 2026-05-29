@@ -3,5 +3,37 @@
 @tailwind utilities;
 
 body {
-  @apply bg-paper text-ink;
+  @apply bg-paper;
+  font-family: Inter, ui-sans-serif, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #050505;
+}
+
+h1 {
+  font-family: "Inter Display", Inter, sans-serif;
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: #050505;
+  text-align: center;
+}
+
+h2 {
+  font-family: "Inter Display", Inter, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #050505;
+}
+
+p {
+  font-family: Inter, ui-sans-serif, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #050505;
 }

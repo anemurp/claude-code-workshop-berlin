@@ -2,7 +2,23 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import type { CaseStudy, Section } from "../data/case-studies";
+
+// ─── Scroll animation variants ────────────────────────────────────────────────
+
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
+const VIEWPORT = { once: true, margin: "-80px" };
 
 // ─── Device mockups ──────────────────────────────────────────────────────────
 
@@ -116,16 +132,15 @@ function MobileTOC({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-
       {open && (
         <div className="px-4 pb-4 space-y-1.5">
-          {items.map((item) => {
-            const isActive = item.id === activeId;
+          {items.map((it) => {
+            const isActive = it.id === activeId;
             return (
               <button
-                key={item.id}
+                key={it.id}
                 onClick={() => {
-                  onNavigate(item.id);
+                  onNavigate(it.id);
                   setOpen(false);
                 }}
                 className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
@@ -134,7 +149,7 @@ function MobileTOC({
                     : "text-navy/55 hover:text-navy hover:bg-navy/5"
                 }`}
               >
-                {item.label}
+                {it.label}
               </button>
             );
           })}
@@ -146,56 +161,62 @@ function MobileTOC({
 
 // ─── Section blocks ──────────────────────────────────────────────────────────
 
-function SectionLabel({ text }: { text: string }) {
-  return (
-    <p className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
-      {text}
-    </p>
-  );
-}
-
 function SectionBlock({ section }: { section: Section }) {
   if (section.layout === "dark") {
     return (
-      <div
+      <motion.div
         id={section.id}
         data-section=""
         className="bg-navy text-warm rounded-3xl px-8 py-14 md:px-14 scroll-mt-36"
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={VIEWPORT}
       >
-        <p className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
+        <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
           {section.label}
-        </p>
-        <h2 className="text-3xl md:text-4xl font-bold leading-tight max-w-2xl mb-5">
+        </motion.p>
+        <motion.h2 variants={item} className="text-3xl md:text-4xl font-bold leading-tight max-w-2xl mb-5">
           {section.heading}
-        </h2>
-        <p className="text-warm/70 text-lg leading-relaxed max-w-[60ch]">
+        </motion.h2>
+        <motion.p variants={item} className="text-warm/70 text-lg leading-relaxed max-w-[60ch]">
           {section.body}
-        </p>
+        </motion.p>
         {section.image && (
-          <div className="mt-12">
+          <motion.div variants={item} className="mt-12">
             <BrowserMockup image={section.image} label={section.label} />
-          </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     );
   }
 
   if (section.layout === "full") {
     return (
-      <div id={section.id} data-section="" className="py-16 scroll-mt-36">
-        <SectionLabel text={section.label} />
-        <h2 className="text-3xl md:text-4xl font-bold text-navy leading-tight max-w-2xl mb-5">
+      <motion.div
+        id={section.id}
+        data-section=""
+        className="py-16 scroll-mt-36"
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={VIEWPORT}
+      >
+        <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
+          {section.label}
+        </motion.p>
+        <motion.h2 variants={item} className="text-3xl md:text-4xl font-bold text-navy leading-tight max-w-2xl mb-5">
           {section.heading}
-        </h2>
-        <p className="text-navy/70 text-lg leading-relaxed max-w-[60ch]">
+        </motion.h2>
+        <motion.p variants={item} className="text-navy/70 text-lg leading-relaxed max-w-[60ch]">
           {section.body}
-        </p>
+        </motion.p>
         {section.image && (
-          <div className="mt-12">
+          <motion.div variants={item} className="mt-12">
             <BrowserMockup image={section.image} label={section.label} />
-          </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     );
   }
 
@@ -203,37 +224,53 @@ function SectionBlock({ section }: { section: Section }) {
   const imageOnLeft = section.layout === "left";
 
   return (
-    <div id={section.id} data-section="" className="py-16 scroll-mt-36">
+    <motion.div
+      id={section.id}
+      data-section=""
+      className="py-16 scroll-mt-36"
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={VIEWPORT}
+    >
       <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
         {imageOnLeft ? (
           <>
-            <div className="flex items-center justify-center">
+            <motion.div variants={item} className="flex items-center justify-center">
               <PhoneMockup image={section.image} label={section.label} />
-            </div>
+            </motion.div>
             <div>
-              <SectionLabel text={section.label} />
-              <h2 className="text-2xl md:text-3xl font-bold text-navy leading-tight mb-4">
+              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
+                {section.label}
+              </motion.p>
+              <motion.h2 variants={item} className="text-2xl md:text-3xl font-bold text-navy leading-tight mb-4">
                 {section.heading}
-              </h2>
-              <p className="text-navy/70 text-lg leading-relaxed">{section.body}</p>
+              </motion.h2>
+              <motion.p variants={item} className="text-navy/70 text-lg leading-relaxed">
+                {section.body}
+              </motion.p>
             </div>
           </>
         ) : (
           <>
             <div>
-              <SectionLabel text={section.label} />
-              <h2 className="text-2xl md:text-3xl font-bold text-navy leading-tight mb-4">
+              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
+                {section.label}
+              </motion.p>
+              <motion.h2 variants={item} className="text-2xl md:text-3xl font-bold text-navy leading-tight mb-4">
                 {section.heading}
-              </h2>
-              <p className="text-navy/70 text-lg leading-relaxed">{section.body}</p>
+              </motion.h2>
+              <motion.p variants={item} className="text-navy/70 text-lg leading-relaxed">
+                {section.body}
+              </motion.p>
             </div>
-            <div className="flex items-center justify-center">
+            <motion.div variants={item} className="flex items-center justify-center">
               <PhoneMockup image={section.image} label={section.label} />
-            </div>
+            </motion.div>
           </>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -242,7 +279,6 @@ function SectionBlock({ section }: { section: Section }) {
 export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
   const [activeId, setActiveId] = useState<string>(cs.sections[0]?.id ?? "");
 
-  // Track which section is in the reading zone
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -253,17 +289,14 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
           setActiveId(visible[0].target.id);
         }
       },
-      // Trigger when a section enters the top 15–35% of the viewport
       { rootMargin: "-15% 0% -65% 0%", threshold: 0 }
     );
-
     document.querySelectorAll("[data-section]").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   const tocItems: TOCItem[] = cs.sections.map((s) => ({ id: s.id, label: s.label }));
 
-  // Smooth-scroll to a section, accounting for sticky navbar (56px) + mobile TOC (48px)
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -274,33 +307,39 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
 
   return (
     <div className="bg-warm text-navy min-h-screen">
-      {/* Mobile TOC — sticky below the main navbar */}
       <MobileTOC items={tocItems} activeId={activeId} onNavigate={scrollTo} />
 
-      {/* Outer shell: sidebar + content at large breakpoint */}
       <div className="mx-auto max-w-6xl px-6 lg:px-8 lg:flex lg:gap-10 xl:gap-16">
 
-        {/* Desktop TOC sidebar */}
         <aside className="hidden lg:block w-52 xl:w-56 shrink-0">
           <div className="sticky top-24 pt-16">
             <DesktopTOC items={tocItems} activeId={activeId} onNavigate={scrollTo} />
           </div>
         </aside>
 
-        {/* Main content */}
         <main className="flex-1 min-w-0 max-w-3xl py-16 lg:py-20">
 
           {/* ── HERO ─────────────────────────────────────────── */}
-          <section className="grid md:grid-cols-2 gap-10 items-start mb-20">
+          <motion.section
+            className="grid md:grid-cols-2 gap-10 items-start mb-20"
+            variants={container}
+            initial="hidden"
+            animate="visible"
+          >
             <div>
-              <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full bg-navy/8 text-navy/55 mb-5">
+              <motion.span
+                variants={item}
+                className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full bg-navy/[0.08] text-navy/55 mb-5"
+              >
                 {cs.company} · {cs.year}
-              </span>
-              <h1 className="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight mb-5">
+              </motion.span>
+              <motion.h1 variants={item} className="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight mb-5">
                 {cs.title}
-              </h1>
-              <p className="text-lg text-navy/65 leading-relaxed mb-8">{cs.subtitle}</p>
-              <dl className="flex flex-col gap-3 text-sm">
+              </motion.h1>
+              <motion.p variants={item} className="text-lg text-navy/65 leading-relaxed mb-8">
+                {cs.subtitle}
+              </motion.p>
+              <motion.dl variants={item} className="flex flex-col gap-3 text-sm">
                 {[
                   { label: "Role", value: cs.role },
                   { label: "Timeline", value: cs.timeline },
@@ -311,42 +350,61 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
                     <dd className="font-medium">{value}</dd>
                   </div>
                 ))}
-              </dl>
+              </motion.dl>
             </div>
-            <div>
+            <motion.div variants={item}>
               <BrowserMockup image={cs.heroImage} label={cs.title} />
-            </div>
-          </section>
+            </motion.div>
+          </motion.section>
 
           {/* ── METRICS BAR ──────────────────────────────────── */}
-          <div className="flex border border-navy/15 rounded-2xl mb-20 overflow-hidden">
+          <motion.div
+            className="flex border border-navy/15 rounded-2xl mb-20 overflow-hidden"
+            variants={container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
+          >
             {cs.metrics.map((m, i) => (
-              <div
+              <motion.div
                 key={i}
+                variants={item}
                 className={`flex-1 px-5 py-7 text-center ${i > 0 ? "border-l border-navy/15" : ""}`}
               >
                 <p className="text-3xl md:text-4xl font-bold text-navy">{m.value}</p>
                 <p className="mt-1.5 text-xs text-navy/50 leading-snug">{m.label}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* ── FULL-WIDTH IMAGE ─────────────────────────────── */}
           {cs.fullWidthImage !== undefined && (
-            <div className="mb-20">
+            <motion.div
+              className="mb-20"
+              variants={item}
+              initial="hidden"
+              whileInView="visible"
+              viewport={VIEWPORT}
+            >
               <BrowserMockup image={cs.fullWidthImage} label={`${cs.title} — full view`} />
-            </div>
+            </motion.div>
           )}
 
           {/* ── FRAMING ──────────────────────────────────────── */}
-          <div className="text-center border-y border-navy/10 py-16 mb-4">
-            <h2 className="text-3xl md:text-4xl font-bold leading-tight max-w-xl mx-auto mb-5">
+          <motion.div
+            className="text-center border-y border-navy/10 py-16 mb-4"
+            variants={container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
+          >
+            <motion.h2 variants={item} className="text-3xl md:text-4xl font-bold leading-tight max-w-xl mx-auto mb-5">
               {cs.framingHeading}
-            </h2>
-            <p className="text-lg text-navy/65 leading-relaxed max-w-prose mx-auto">
+            </motion.h2>
+            <motion.p variants={item} className="text-lg text-navy/65 leading-relaxed max-w-prose mx-auto">
               {cs.framingBody}
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           {/* ── CONTENT SECTIONS ─────────────────────────────── */}
           <div className="divide-y divide-navy/10">
@@ -356,18 +414,26 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
           </div>
 
           {/* ── CTA ──────────────────────────────────────────── */}
-          <div className="mt-20 bg-navy rounded-3xl px-8 py-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-warm mb-8 leading-tight">
+          <motion.div
+            className="mt-20 bg-navy rounded-3xl px-8 py-16 text-center"
+            variants={container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
+          >
+            <motion.h2 variants={item} className="text-3xl md:text-4xl font-bold text-warm mb-8 leading-tight">
               Interested in working together?
-            </h2>
-            <a
-              href="/#contact"
-              className="inline-block px-8 py-4 bg-coral text-white font-semibold rounded-full text-lg hover:opacity-90 active:scale-95 transition-all"
-            >
-              Get in touch
-            </a>
+            </motion.h2>
+            <motion.div variants={item}>
+              <a
+                href="/#contact"
+                className="inline-block px-8 py-4 bg-coral text-white font-semibold rounded-full text-lg hover:opacity-90 active:scale-95 transition-all"
+              >
+                Get in touch
+              </a>
+            </motion.div>
             {cs.nextProject && (
-              <div className="mt-12 pt-12 border-t border-warm/10">
+              <motion.div variants={item} className="mt-12 pt-12 border-t border-warm/10">
                 <p className="text-warm/40 text-xs uppercase tracking-widest mb-3">
                   Next project
                 </p>
@@ -377,9 +443,9 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
                 >
                   {cs.nextProject.title} →
                 </Link>
-              </div>
+              </motion.div>
             )}
-          </div>
+          </motion.div>
 
           {/* ── FOOTER ───────────────────────────────────────── */}
           <footer className="mt-12 py-8 border-t border-navy/10 flex items-center justify-between text-sm text-navy/35">
