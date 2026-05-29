@@ -2,20 +2,19 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import type { CaseStudy, Section } from "../data/case-studies";
 
 // ─── Scroll animation variants ────────────────────────────────────────────────
 
-const container = {
+const container: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 const VIEWPORT = { once: true, margin: "-80px" };
