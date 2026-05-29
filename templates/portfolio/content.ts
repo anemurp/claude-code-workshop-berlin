@@ -5,12 +5,12 @@
 // ────────────────────────────────────────────────────────────────
 
 export const hero = {
-  name: "Anna Schneider",
+  name: "Anna Murphy",
   role: "Product Designer",
   location: "Berlin, Germany",
   headline:
     "I help early-stage teams turn fuzzy ideas into shipping products. Currently designing checkout flows at a fintech startup.",
-  ctaPrimary: { label: "See my work", href: "#projects" },
+  ctaPrimary: { label: "See my work", href: "#work" },
   ctaSecondary: { label: "Get in touch", href: "#contact" },
 };
 
@@ -125,7 +125,28 @@ export const contact = {
   ],
 };
 
+export const hackathonProjects = {
+  intro:
+    "Side projects and hackathon builds — mostly AI experiments and tools I wanted to exist.",
+  items: [
+    {
+      title: "Berlin Coffee Map",
+      year: "2023",
+      summary:
+        "A side project mapping independent coffee roasters in Berlin. Built with React + Mapbox. Used by ~2k people a week.",
+      link: { label: "View live", href: "#" },
+    },
+    {
+      title: "AI Design Critique Tool",
+      year: "2024",
+      summary:
+        "A Claude-powered tool that reviews Figma exports against accessibility and UX heuristics. Built at AI Hackathon Berlin.",
+      link: { label: "GitHub", href: "#" },
+    },
+  ],
+};
+
 export const meta = {
-  title: "Anna Schneider — Product Designer",
+  title: "Anna Murphy — Product Designer",
   description: "Berlin-based product designer. Currently at Tide.",
 };

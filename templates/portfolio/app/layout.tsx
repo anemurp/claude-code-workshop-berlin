@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { meta } from "../content";
+import { Navbar } from "../components/Navbar";
 
 export const metadata: Metadata = {
   title: meta.title,
@@ -14,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
