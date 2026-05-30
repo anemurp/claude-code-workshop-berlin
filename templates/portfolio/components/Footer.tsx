@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { contact, hero } from "../content";
+import { ButterflyAnimation } from "./ButterflyAnimation";
 
 const CONFETTI = [
   { x: -220, y: -140, rotate: 45,   color: "#E8612A", delay: 0.00, w: 14, h: 9  },
@@ -201,38 +202,46 @@ export function Footer() {
         <PatternBand />
 
         <div className="relative z-10 mx-auto max-w-5xl px-8 pt-10 pb-8">
-          <div className="relative inline-block">
-            <AnimatePresence>{copied && <CopiedAnimation />}</AnimatePresence>
-            <button
-              onClick={copyEmail}
-              className="block font-display text-cream hover:text-terracotta transition-colors cursor-pointer text-left"
-              style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: "1.15" }}
-            >
-              {contact.email}
-            </button>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-12">
+
+            {/* Left column */}
+            <div className="flex-1 w-full">
+              <div className="relative inline-block">
+                <AnimatePresence>{copied && <CopiedAnimation />}</AnimatePresence>
+                <button
+                  onClick={copyEmail}
+                  className="block font-display text-cream hover:text-terracotta transition-colors cursor-pointer text-left"
+                  style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: "1.15" }}
+                >
+                  {contact.email}
+                </button>
+              </div>
+
+              <p className="mt-4 text-sm leading-relaxed text-periwinkle">
+                I design for the people who were never considered in the first draft.
+              </p>
+
+              <div className="mt-5 flex items-center gap-5">
+                <a
+                  href={linkedInHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-sm text-cream hover:text-terracotta transition-colors"
+                >
+                  <LinkedInIcon />
+                  LinkedIn
+                </a>
+              </div>
+
+              <p className="mt-8 text-sm text-periwinkle">{hero.name} &copy; 2026</p>
+            </div>
+
+            {/* Right column — butterfly */}
+            <div className="md:w-[40%] flex justify-center md:justify-end">
+              <ButterflyAnimation />
+            </div>
+
           </div>
-
-          <p className="mt-4 text-sm leading-relaxed text-periwinkle">
-            I design for the people who were never considered in the first draft.
-          </p>
-
-          <div className="mt-5 flex items-center gap-5">
-            <a
-              href={linkedInHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-sm text-cream hover:text-terracotta transition-colors"
-            >
-              <LinkedInIcon />
-              LinkedIn
-            </a>
-          </div>
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-5xl px-8 py-5 border-t border-cobalt-light">
-          <span className="text-sm text-periwinkle">
-            {hero.name} &copy; 2026
-          </span>
         </div>
       </footer>
   );
