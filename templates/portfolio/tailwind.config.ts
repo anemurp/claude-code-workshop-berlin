@@ -51,7 +51,7 @@ const config: Config = {
       animation: {
         "ticker-left":  "ticker-left 35s linear infinite",
         "ticker-right": "ticker-right 42s linear infinite",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "pulse-glow":   "pulse-glow 2s ease-in-out infinite",
       },
       keyframes: {
         "ticker-left": {

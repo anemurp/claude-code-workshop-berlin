@@ -13,7 +13,6 @@ type CardStudy = {
   tags: string[];
 };
 
-// Interpolation factor: lower = more lag (0.08–0.15 feels natural)
 const LERP = 0.12;
 
 function lerp(a: number, b: number, t: number) {
@@ -23,14 +22,11 @@ function lerp(a: number, b: number, t: number) {
 export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
 
-  // The outer div is always in the DOM — we move it directly via RAF
-  // so the lerp runs without triggering React re-renders on every frame.
   const positionRef = useRef<HTMLDivElement>(null);
   const target = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
   const rafId = useRef<number>(0);
 
-  // Track raw cursor position globally
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       target.current = { x: e.clientX, y: e.clientY };
@@ -39,7 +35,6 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
-  // RAF lerp loop — writes directly to the div's transform, bypassing React
   useEffect(() => {
     const tick = () => {
       current.current.x = lerp(current.current.x, target.current.x, LERP);
@@ -56,8 +51,6 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
     return () => cancelAnimationFrame(rafId.current);
   }, []);
 
-  // Snap current to target on enter so the preview appears at the cursor
-  // immediately — lag only kicks in once the user starts moving.
   const handleEnter = useCallback((slug: string) => {
     current.current = { ...target.current };
     setActiveSlug(slug);
@@ -69,11 +62,7 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
 
   return (
     <>
-      {/*
-        Position wrapper: always mounted, moved via RAF.
-        Framer-motion only controls opacity + scale on the inner div,
-        so there's no conflict with the direct transform we apply here.
-      */}
+      {/* Cursor preview */}
       <div
         ref={positionRef}
         className="fixed top-0 left-0 z-50 pointer-events-none"
@@ -113,12 +102,13 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
         {studies.map((cs) => (
           <li key={cs.slug}>
             <Link href={`/case-studies/${cs.slug}`} className="group block">
+              {/* Thumbnail */}
               <div className="w-full aspect-video bg-ink/5 rounded-xl mb-5 overflow-hidden">
                 {cs.thumbnail ? (
                   <img
                     src={cs.thumbnail}
                     alt={cs.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-sm text-ink/25">
@@ -127,17 +117,22 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
                 )}
               </div>
 
+              {/* Title row */}
               <div className="flex items-baseline justify-between gap-4">
                 <h3
-                  className="text-xl font-semibold group-hover:text-accent transition"
+                  className="text-xl font-semibold transition"
+                  style={{ color: "var(--text)" }}
                   onMouseEnter={() => handleEnter(cs.slug)}
                   onMouseLeave={handleLeave}
                 >
                   {cs.title}
                 </h3>
-                <span className="text-sm text-ink/50 shrink-0">{cs.year}</span>
+                <span className="text-sm shrink-0" style={{ color: "var(--muted)" }}>
+                  {cs.year}
+                </span>
               </div>
 
+              {/* Tags */}
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {cs.tags.map((tag) => (
                   <span
@@ -149,8 +144,14 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
                 ))}
               </div>
 
-              <p className="mt-3 text-ink/75 leading-relaxed">{cs.description}</p>
-              <span className="mt-4 inline-block text-sm font-medium text-accent">
+              <p className="mt-3 leading-relaxed" style={{ color: "var(--muted)" }}>
+                {cs.description}
+              </p>
+
+              <span
+                className="mt-4 inline-block text-sm font-medium"
+                style={{ color: "var(--accent)" }}
+              >
                 Read case study →
               </span>
             </Link>

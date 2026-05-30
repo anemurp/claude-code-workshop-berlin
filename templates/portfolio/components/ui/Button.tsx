@@ -13,13 +13,13 @@ type AsButton = CommonProps & { href?: never } & ButtonHTMLAttributes<HTMLButton
 type Props = AsAnchor | AsButton;
 
 const base =
-  "inline-flex items-center justify-center px-6 h-[50px] rounded-full text-base font-medium transition-all cursor-pointer select-none";
+  "inline-flex items-center justify-center px-6 h-[50px] rounded-full text-base font-medium transition-all cursor-pointer select-none active:scale-95 active:duration-75";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-ink text-paper hover:opacity-80 transition-opacity duration-200",
+    "bg-cobalt text-cream hover:opacity-80 active:opacity-100 active:brightness-75 transition-opacity duration-200",
   secondary:
-    "bg-transparent text-ink border border-ink hover:bg-ink hover:text-paper transition-[background-color,color] duration-200",
+    "bg-transparent text-cobalt border border-cobalt hover:bg-cobalt hover:text-cream active:bg-cobalt-light active:text-cream active:border-cobalt-light transition-[background-color,color] duration-200",
 };
 
 export function Button({ variant = "primary", children, className = "", ...rest }: Props) {

@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { meta } from "../content";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
-import { ThemeProvider } from "../context/ThemeContext";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -26,13 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased bg-cobalt">
-        <ThemeProvider>
-          <div className="rounded-b-[32px] overflow-hidden" style={{ backgroundColor: "var(--bg)" }}>
-            <Navbar />
-            {children}
-          </div>
-          <Footer />
-        </ThemeProvider>
+        <div className="rounded-b-[32px]" style={{ backgroundColor: "var(--bg)" }}>
+          <Navbar />
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
