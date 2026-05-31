@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import { caseStudies } from "../data/case-studies";
 import type { CaseStudy, Section } from "../data/case-studies";
 
 // ─── Scroll animation variants ────────────────────────────────────────────────
@@ -304,6 +305,9 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
   }, []);
 
   const tocItems: TOCItem[] = cs.sections.map((s) => ({ id: s.id, label: s.label }));
+  const nextCs = cs.nextProject
+    ? caseStudies.find((s) => s.slug === cs.nextProject!.slug)
+    : undefined;
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -416,7 +420,7 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 max-w-3xl py-16 lg:py-20">
+        <main className="flex-1 min-w-0 max-w-3xl pt-16 lg:pt-20">
 
           {/* ── FULL-WIDTH IMAGE ─────────────────────────────── */}
           {cs.fullWidthImage !== undefined && (
@@ -453,49 +457,80 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
               <SectionBlock key={section.id} section={section} />
             ))}
           </div>
+        </main>
+      </div>
 
-          {/* ── CTA ──────────────────────────────────────────── */}
+      {/* ── NEXT PROJECT + FOOTER — outside the flex container so the
+           aside ends with the content sections and the TOC stops sticking ── */}
+      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+
+        {cs.nextProject && (
           <motion.div
-            className="mt-20 bg-navy rounded-3xl px-8 py-16 text-center"
-            variants={container}
+            className="pt-16 pb-16"
+            variants={item}
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT}
           >
-            <motion.h2 variants={item} className="text-3xl md:text-4xl font-bold text-warm mb-8 leading-tight">
-              Interested in working together?
-            </motion.h2>
-            <motion.div variants={item}>
-              <a
-                href="/#contact"
-                className="inline-block px-8 py-4 bg-coral text-white font-semibold rounded-full text-lg hover:opacity-90 active:scale-95 transition-all"
+<Link href={`/case-studies/${cs.nextProject.slug}`} className="group block max-w-3xl mx-auto">
+              <div
+                className="flex rounded-2xl border border-navy/10 overflow-hidden transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.10)]"
+                style={{ backgroundColor: "rgba(255,255,255,0.6)" }}
               >
-                Get in touch
-              </a>
-            </motion.div>
-            {cs.nextProject && (
-              <motion.div variants={item} className="mt-12 pt-12 border-t border-warm/10">
-                <p className="text-warm/40 text-xs uppercase tracking-widest mb-3">
-                  Next project
-                </p>
-                <Link
-                  href={`/case-studies/${cs.nextProject.slug}`}
-                  className="text-warm text-xl font-semibold hover:text-primary transition-colors"
-                >
-                  {cs.nextProject.title} →
-                </Link>
-              </motion.div>
-            )}
-          </motion.div>
-
-          {/* ── FOOTER ───────────────────────────────────────── */}
-          <footer className="mt-12 py-8 border-t border-navy/10 flex items-center justify-between text-sm text-navy/35">
-            <Link href="/" className="hover:text-navy transition-colors">
-              ← All work
+                {/* Thumbnail — left side, stretches to text height */}
+                <div className="w-48 md:w-64 shrink-0 overflow-hidden">
+                  {nextCs?.heroImage ? (
+                    <img
+                      src={nextCs.heroImage}
+                      alt={cs.nextProject.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div
+                      className="w-full h-full flex items-center justify-center"
+                      style={{ background: "linear-gradient(135deg, #1B2A6B 0%, #E8612A 100%)" }}
+                    >
+                      <span
+                        className="font-bold text-white text-center px-4"
+                        style={{ fontSize: "clamp(14px, 2vw, 22px)", opacity: 0.2 }}
+                      >
+                        {cs.nextProject.title}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                {/* Text — right side, determines card height */}
+                <div className="flex flex-col justify-between p-6 lg:p-8 min-w-0">
+                  <div>
+                    {nextCs && (
+                      <p className="text-xs text-navy/40 mb-2">{nextCs.company} · {nextCs.year}</p>
+                    )}
+                    <h3 style={{ fontSize: "clamp(18px, 2.5vw, 24px)", fontWeight: 700, lineHeight: 1.2, color: "#051225" }}>
+                      {cs.nextProject.title}
+                    </h3>
+                    {nextCs?.subtitle && (
+                      <p className="text-navy/55 mt-2 leading-relaxed text-sm">{nextCs.subtitle}</p>
+                    )}
+                  </div>
+                  <span
+                    className="mt-5 inline-flex items-center gap-1 font-semibold text-cobalt"
+                    style={{ fontSize: 14 }}
+                  >
+                    Read case study
+                    <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  </span>
+                </div>
+              </div>
             </Link>
-            <span>Made with Claude Code · Berlin · 2026</span>
-          </footer>
-        </main>
+          </motion.div>
+        )}
+
+        <footer className="py-8 border-t border-navy/10 flex items-center justify-between text-sm text-navy/35">
+          <Link href="/" className="hover:text-navy transition-colors">
+            ← All work
+          </Link>
+          <span>Made with Claude Code · Berlin · 2026</span>
+        </footer>
       </div>
     </div>
   );
