@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { hero, tickerRow1, tickerRow2 } from "../content";
 import { Button } from "./ui/Button";
+import { InteractiveHeadline } from "./InteractiveHeadline";
 
 const container: Variants = {
   hidden: {},
@@ -77,9 +78,9 @@ export function Hero() {
           </span>
         </motion.div>
 
-        <motion.h1 variants={fadeUp} className="max-w-[900px] mx-auto">
-          {hero.tagline}
-        </motion.h1>
+        <motion.div variants={fadeUp} className="max-w-[900px] mx-auto">
+          <InteractiveHeadline />
+        </motion.div>
 
         <motion.p
           variants={fadeUp}

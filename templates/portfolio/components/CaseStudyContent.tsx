@@ -90,8 +90,8 @@ function DesktopTOC({
             onClick={() => onNavigate(item.id)}
             className={`w-full text-left px-4 py-3 rounded-2xl text-[15px] font-medium transition-all duration-200 ${
               active
-                ? "bg-primary text-white font-semibold shadow-sm"
-                : "text-navy/45 hover:text-navy hover:bg-navy/5"
+                ? "bg-cobalt text-white font-semibold shadow-sm"
+                : "text-navy/45 hover:text-cobalt hover:bg-cobalt/5"
             }`}
           >
             {item.label}
@@ -144,8 +144,8 @@ function MobileTOC({
                 }}
                 className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? "bg-primary text-white font-semibold"
-                    : "text-navy/55 hover:text-navy hover:bg-navy/5"
+                    ? "bg-cobalt text-white font-semibold"
+                    : "text-navy/55 hover:text-cobalt hover:bg-cobalt/5"
                 }`}
               >
                 {it.label}
@@ -201,7 +201,7 @@ function SectionBlock({ section }: { section: Section }) {
         whileInView="visible"
         viewport={VIEWPORT}
       >
-        <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
+        <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-cobalt mb-4">
           {section.label}
         </motion.p>
         <motion.h2 variants={item} className="text-3xl md:text-4xl font-bold text-navy leading-tight max-w-2xl mb-5">
@@ -239,7 +239,7 @@ function SectionBlock({ section }: { section: Section }) {
               <PhoneMockup image={section.image} label={section.label} />
             </motion.div>
             <div>
-              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
+              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-cobalt mb-4">
                 {section.label}
               </motion.p>
               <motion.h2 variants={item} className="text-2xl md:text-3xl font-bold text-navy leading-tight mb-4">
@@ -253,7 +253,7 @@ function SectionBlock({ section }: { section: Section }) {
         ) : (
           <>
             <div>
-              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
+              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-cobalt mb-4">
                 {section.label}
               </motion.p>
               <motion.h2 variants={item} className="text-2xl md:text-3xl font-bold text-navy leading-tight mb-4">
