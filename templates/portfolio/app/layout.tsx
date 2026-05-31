@@ -25,8 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased bg-cobalt">
+        <Navbar />
         <div className="rounded-b-[32px]" style={{ backgroundColor: "var(--bg)" }}>
-          <Navbar />
           {children}
         </div>
         <Footer />

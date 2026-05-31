@@ -21,6 +21,8 @@ function lerp(a: number, b: number, t: number) {
 
 export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [hoveredArrow, setHoveredArrow] = useState<string | null>(null);
 
   const positionRef = useRef<HTMLDivElement>(null);
   const target = useRef({ x: 0, y: 0 });
@@ -86,8 +88,13 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-accent/20 to-ink/10 flex items-end p-4">
-                  <span className="text-sm font-semibold text-ink/60 leading-snug">
+                <div
+                  className="w-full h-full flex items-center justify-center"
+                  style={{
+                    background: "linear-gradient(135deg, #1B2A6B 0%, #E8612A 100%)",
+                  }}
+                >
+                  <span className="text-sm font-semibold text-center px-4" style={{ color: "rgba(255,255,255,0.3)" }}>
                     {active.title}
                   </span>
                 </div>
@@ -98,62 +105,118 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
       </div>
 
       {/* Card list */}
-      <ul className="space-y-14">
+      <ul className="space-y-6">
         {studies.map((cs) => (
-          <li key={cs.slug}>
-            <Link href={`/case-studies/${cs.slug}`} className="group block">
-              {/* Thumbnail */}
-              <div className="w-full aspect-video bg-ink/5 rounded-xl mb-5 overflow-hidden">
+          <li
+            key={cs.slug}
+            onMouseEnter={() => setHoveredCard(cs.slug)}
+            onMouseLeave={() => setHoveredCard(null)}
+            style={{
+              borderRadius: "16px",
+              overflow: "hidden",
+              backgroundColor: "var(--card-bg)",
+              border: hoveredCard === cs.slug
+                ? "1px solid rgba(0,0,0,0.08)"
+                : "1px solid #E8E8E8",
+              transform: hoveredCard === cs.slug ? "translateY(-6px)" : "translateY(0)",
+              boxShadow: hoveredCard === cs.slug
+                ? "0 12px 40px rgba(0,0,0,0.12)"
+                : "none",
+              transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+            }}
+          >
+            <Link href={`/case-studies/${cs.slug}`} className="block">
+              {/* Thumbnail — 16:9 */}
+              <div className="w-full overflow-hidden" style={{ aspectRatio: "16/9" }}>
                 {cs.thumbnail ? (
                   <img
                     src={cs.thumbnail}
                     alt={cs.title}
                     className="w-full h-full object-cover"
+                    style={{
+                      transform: hoveredCard === cs.slug ? "scale(1.04)" : "scale(1)",
+                      transition: "transform 0.4s ease",
+                    }}
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-sm text-ink/25">
-                    {cs.title}
+                  <div
+                    className="w-full h-full flex items-center justify-center"
+                    style={{
+                      background: "linear-gradient(135deg, #1B2A6B 0%, #E8612A 100%)",
+                    }}
+                  >
+                    <span
+                      className="font-bold text-white text-center px-8"
+                      style={{ fontSize: "clamp(20px, 4vw, 36px)", opacity: 0.3 }}
+                    >
+                      {cs.title}
+                    </span>
                   </div>
                 )}
               </div>
 
-              {/* Title row */}
-              <div className="flex items-baseline justify-between gap-4">
-                <h3
-                  className="text-xl font-semibold transition"
-                  style={{ color: "var(--text)" }}
-                  onMouseEnter={() => handleEnter(cs.slug)}
-                  onMouseLeave={handleLeave}
+              {/* Content */}
+              <div className="p-5">
+                {/* Title row */}
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3
+                    className="text-xl font-semibold transition"
+                    style={{ color: "var(--text)" }}
+                    onMouseEnter={() => handleEnter(cs.slug)}
+                    onMouseLeave={handleLeave}
+                  >
+                    {cs.title}
+                  </h3>
+                  <span className="text-sm shrink-0" style={{ color: "var(--muted)" }}>
+                    {cs.year}
+                  </span>
+                </div>
+
+                {/* Tags */}
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {cs.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      style={{
+                        fontSize: "11px",
+                        padding: "4px 10px",
+                        borderRadius: "9999px",
+                        backgroundColor: "#F0F0F0",
+                        color: "#444444",
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="mt-3 leading-relaxed" style={{ color: "var(--muted)" }}>
+                  {cs.description}
+                </p>
+
+                {/* CTA */}
+                <span
+                  className="mt-4 inline-flex items-center gap-0.5"
+                  onMouseEnter={() => setHoveredArrow(cs.slug)}
+                  onMouseLeave={() => setHoveredArrow(null)}
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: 600,
+                    color: "#0F0F0F",
+                  }}
                 >
-                  {cs.title}
-                </h3>
-                <span className="text-sm shrink-0" style={{ color: "var(--muted)" }}>
-                  {cs.year}
+                  Read case study
+                  <span
+                    style={{
+                      display: "inline-block",
+                      transform: hoveredArrow === cs.slug ? "translateX(4px)" : "translateX(0)",
+                      transition: "transform 0.2s ease",
+                    }}
+                  >
+                    &nbsp;→
+                  </span>
                 </span>
               </div>
-
-              {/* Tags */}
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {cs.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs rounded-full border border-ink/15 text-ink/60"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <p className="mt-3 leading-relaxed" style={{ color: "var(--muted)" }}>
-                {cs.description}
-              </p>
-
-              <span
-                className="mt-4 inline-block text-sm font-medium"
-                style={{ color: "var(--accent)" }}
-              >
-                Read case study →
-              </span>
             </Link>
           </li>
         ))}
