@@ -43,7 +43,10 @@ function PhoneMockup({ image, label }: { image?: string; label?: string }) {
 
 function BrowserMockup({ image, label }: { image?: string; label?: string }) {
   return (
-    <div className="rounded-2xl border border-navy/15 overflow-hidden shadow-xl">
+    <div
+      className="rounded-2xl border border-navy/15 overflow-hidden"
+      style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }}
+    >
       <div className="bg-navy/5 px-4 py-2.5 flex items-center gap-3 border-b border-navy/10">
         <div className="flex gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-red-400/50" />
@@ -52,13 +55,19 @@ function BrowserMockup({ image, label }: { image?: string; label?: string }) {
         </div>
         <div className="flex-1 bg-white/50 rounded h-4" />
       </div>
-      <div className="aspect-[16/10] bg-warm">
+      <div className="aspect-[16/10]">
         {image ? (
           <img src={image} alt={label ?? ""} className="w-full h-full object-cover" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <span className="text-sm text-navy/25">
-              {label ?? "Add screenshot path in data/case-studies.ts"}
+          <div
+            className="w-full h-full flex items-center justify-center"
+            style={{ background: "linear-gradient(135deg, #1B2A6B 0%, #E8612A 100%)" }}
+          >
+            <span
+              className="font-bold text-white text-center px-8"
+              style={{ fontSize: "clamp(20px, 4vw, 40px)", opacity: 0.2 }}
+            >
+              {label ?? ""}
             </span>
           </div>
         )}
@@ -306,8 +315,99 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
 
   return (
     <div className="bg-warm text-navy min-h-screen">
+
+      {/* ══ PRE-TOC: full-width, no sidebar ════════════════════ */}
+      <motion.div
+        className="mx-auto max-w-6xl px-6 lg:px-8"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Large hero image */}
+        <motion.div variants={item} className="pt-16 lg:pt-20 mb-10">
+          <BrowserMockup image={cs.heroImage} label={cs.title} />
+        </motion.div>
+
+        {/* Title + description + metadata container */}
+        <motion.div
+          variants={container}
+          className="border border-navy/10 rounded-2xl p-8 lg:p-10 mb-8"
+          style={{ backgroundColor: "rgba(255,255,255,0.6)" }}
+        >
+          <motion.span
+            variants={item}
+            className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full bg-navy/[0.08] text-navy/55 mb-5"
+          >
+            {cs.company} · {cs.year}
+          </motion.span>
+          <motion.h1
+            variants={item}
+            style={{
+              fontSize: "clamp(40px, 6vw, 72px)",
+              fontWeight: 900,
+              lineHeight: 1.0,
+              letterSpacing: "-0.03em",
+              maxWidth: "580px",
+              display: "block",
+            }}
+          >
+            {cs.title}
+          </motion.h1>
+          <motion.p
+            variants={item}
+            style={{ fontSize: "18px", lineHeight: 1.6, color: "#666", maxWidth: "560px", marginTop: "24px" }}
+          >
+            {cs.subtitle}
+          </motion.p>
+          <motion.dl
+            variants={item}
+            style={{ display: "flex", flexDirection: "column", gap: "16px", marginTop: "32px" }}
+          >
+            {[
+              { label: "Role", value: cs.role },
+              { label: "Timeline", value: cs.timeline },
+              { label: "Team", value: cs.team },
+            ].map(({ label, value }) => (
+              <div key={label} className="flex items-baseline">
+                <dt style={{ fontSize: "13px", color: "#999", minWidth: "80px", flexShrink: 0 }}>{label}</dt>
+                <dd style={{ fontSize: "15px", fontWeight: 500, color: "#0F0F0F" }}>{value}</dd>
+              </div>
+            ))}
+          </motion.dl>
+        </motion.div>
+
+        {/* Metrics — Key Results */}
+        <motion.div
+          variants={container}
+          className="border border-navy/15 rounded-2xl mb-12 overflow-hidden"
+        >
+          <motion.div variants={item} className="px-8 py-4 border-b border-[#E8E8E8]">
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-cobalt">Key Results</p>
+          </motion.div>
+          <div className="flex">
+            {cs.metrics.map((m, i) => (
+              <motion.div
+                key={i}
+                variants={item}
+                className="flex-1 px-5 text-center"
+                style={{
+                  paddingTop: "40px",
+                  paddingBottom: "40px",
+                  borderLeft: i > 0 ? "1px solid #E8E8E8" : undefined,
+                }}
+              >
+                <p style={{ fontSize: "52px", fontWeight: 800, lineHeight: 1, color: "#051225" }}>{m.value}</p>
+                <p style={{ marginTop: "8px", fontSize: "13px", color: "#999", maxWidth: "160px", textAlign: "center", lineHeight: 1.4, margin: "8px auto 0" }}>{m.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* MobileTOC appears after the statistics */}
       <MobileTOC items={tocItems} activeId={activeId} onNavigate={scrollTo} />
 
+      {/* ══ TOC SIDEBAR LAYOUT ══════════════════════════════════ */}
       <div className="mx-auto max-w-6xl px-6 lg:px-8 lg:flex lg:gap-10 xl:gap-16">
 
         <aside className="hidden lg:block w-52 xl:w-56 shrink-0">
@@ -317,64 +417,6 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
         </aside>
 
         <main className="flex-1 min-w-0 max-w-3xl py-16 lg:py-20">
-
-          {/* ── HERO ─────────────────────────────────────────── */}
-          <motion.section
-            className="grid md:grid-cols-2 gap-10 items-start mb-20"
-            variants={container}
-            initial="hidden"
-            animate="visible"
-          >
-            <div>
-              <motion.span
-                variants={item}
-                className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full bg-navy/[0.08] text-navy/55 mb-5"
-              >
-                {cs.company} · {cs.year}
-              </motion.span>
-              <motion.h1 variants={item} className="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight mb-5">
-                {cs.title}
-              </motion.h1>
-              <motion.p variants={item} className="text-lg text-navy/65 leading-relaxed mb-8">
-                {cs.subtitle}
-              </motion.p>
-              <motion.dl variants={item} className="flex flex-col gap-3 text-sm">
-                {[
-                  { label: "Role", value: cs.role },
-                  { label: "Timeline", value: cs.timeline },
-                  { label: "Team", value: cs.team },
-                ].map(({ label, value }) => (
-                  <div key={label} className="flex gap-4">
-                    <dt className="text-navy/40 w-20 shrink-0">{label}</dt>
-                    <dd className="font-medium">{value}</dd>
-                  </div>
-                ))}
-              </motion.dl>
-            </div>
-            <motion.div variants={item}>
-              <BrowserMockup image={cs.heroImage} label={cs.title} />
-            </motion.div>
-          </motion.section>
-
-          {/* ── METRICS BAR ──────────────────────────────────── */}
-          <motion.div
-            className="flex border border-navy/15 rounded-2xl mb-20 overflow-hidden"
-            variants={container}
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT}
-          >
-            {cs.metrics.map((m, i) => (
-              <motion.div
-                key={i}
-                variants={item}
-                className={`flex-1 px-5 py-7 text-center ${i > 0 ? "border-l border-navy/15" : ""}`}
-              >
-                <p className="text-3xl md:text-4xl font-bold text-navy">{m.value}</p>
-                <p className="mt-1.5 text-xs text-navy/50 leading-snug">{m.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
 
           {/* ── FULL-WIDTH IMAGE ─────────────────────────────── */}
           {cs.fullWidthImage !== undefined && (
