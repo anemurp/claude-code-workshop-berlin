@@ -320,92 +320,128 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
   return (
     <div className="bg-warm text-navy min-h-screen">
 
-      {/* ══ PRE-TOC: full-width, no sidebar ════════════════════ */}
+      {/* ══ PRE-TOC: two-column hero ════════════════════════════ */}
       <motion.div
-        className="mx-auto max-w-6xl px-6 lg:px-8"
+        className="mx-auto max-w-6xl px-6 lg:px-8 pt-16 lg:pt-20 pb-12"
         variants={container}
         initial="hidden"
         animate="visible"
       >
         {/* Large hero image */}
-        <motion.div variants={item} className="pt-16 lg:pt-20 mb-10">
+        <motion.div variants={item} className="mb-10">
           <BrowserMockup image={cs.heroImage} label={cs.title} />
         </motion.div>
 
-        {/* Title + description + metadata container */}
-        <motion.div
-          variants={container}
-          className="border border-navy/10 rounded-2xl p-8 lg:p-10 mb-8"
-          style={{ backgroundColor: "rgba(255,255,255,0.6)" }}
-        >
-          <motion.span
-            variants={item}
-            className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full bg-navy/[0.08] text-navy/55 mb-5"
-          >
-            {cs.company} · {cs.year}
-          </motion.span>
-          <motion.h1
+        <div className="grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-8 md:gap-12 items-start">
+
+          {/* ── LEFT COLUMN: title + subtitle in white card ── */}
+          <motion.div
             variants={item}
             style={{
-              fontSize: "clamp(40px, 6vw, 72px)",
-              fontWeight: 900,
-              lineHeight: 1.0,
-              letterSpacing: "-0.03em",
-              maxWidth: "580px",
-              display: "block",
+              backgroundColor: "#FFFFFF",
+              borderRadius: "12px",
+              padding: "28px",
+              border: "1px solid #E8E8E8",
             }}
           >
-            {cs.title}
-          </motion.h1>
-          <motion.p
-            variants={item}
-            style={{ fontSize: "18px", lineHeight: 1.6, color: "#666", maxWidth: "560px", marginTop: "24px" }}
-          >
-            {cs.subtitle}
-          </motion.p>
-          <motion.dl
-            variants={item}
-            style={{ display: "flex", flexDirection: "column", gap: "16px", marginTop: "32px" }}
-          >
-            {[
-              { label: "Role", value: cs.role },
-              { label: "Timeline", value: cs.timeline },
-              { label: "Team", value: cs.team },
-            ].map(({ label, value }) => (
-              <div key={label} className="flex items-baseline">
-                <dt style={{ fontSize: "13px", color: "#999", minWidth: "80px", flexShrink: 0 }}>{label}</dt>
-                <dd style={{ fontSize: "15px", fontWeight: 500, color: "#0F0F0F" }}>{value}</dd>
-              </div>
-            ))}
-          </motion.dl>
-        </motion.div>
+            <span
+              style={{
+                display: "inline-block",
+                backgroundColor: "#F0F0F0",
+                color: "#666",
+                fontSize: "13px",
+                padding: "6px 12px",
+                borderRadius: "9999px",
+                marginBottom: "20px",
+              }}
+            >
+              {cs.company}
+            </span>
 
-        {/* Metrics — Key Results */}
-        <motion.div
-          variants={container}
-          className="border border-navy/15 rounded-2xl mb-12 overflow-hidden"
-        >
-          <motion.div variants={item} className="px-8 py-4 border-b border-[#E8E8E8]">
-            <p className="text-xs font-bold uppercase tracking-[0.15em] text-cobalt">Key Results</p>
+            <h1
+              style={{
+                fontSize: "clamp(36px, 5vw, 56px)",
+                fontWeight: 800,
+                lineHeight: 1.05,
+                letterSpacing: "-0.03em",
+                color: "#0F0F0F",
+                display: "block",
+              }}
+            >
+              {cs.title}
+            </h1>
+
+            <p style={{ fontSize: "17px", color: "#666", lineHeight: 1.6, marginTop: "20px" }}>
+              {cs.subtitle}
+            </p>
           </motion.div>
-          <div className="flex">
-            {cs.metrics.map((m, i) => (
-              <motion.div
-                key={i}
-                variants={item}
-                className="flex-1 px-5 text-center"
-                style={{
-                  paddingTop: "40px",
-                  paddingBottom: "40px",
-                  borderLeft: i > 0 ? "1px solid #E8E8E8" : undefined,
-                }}
-              >
-                <p style={{ fontSize: "52px", fontWeight: 800, lineHeight: 1, color: "#051225" }}>{m.value}</p>
-                <p style={{ marginTop: "8px", fontSize: "13px", color: "#999", maxWidth: "160px", textAlign: "center", lineHeight: 1.4, margin: "8px auto 0" }}>{m.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+
+          {/* ── RIGHT COLUMN: two stacked cards ── */}
+          <motion.div variants={container} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+
+            {/* Top card — 2×2 metadata grid */}
+            <motion.dl
+              variants={item}
+              style={{
+                backgroundColor: "#FFFFFF",
+                borderRadius: "12px",
+                padding: "28px",
+                border: "1px solid #E8E8E8",
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "24px",
+              }}
+            >
+              {[
+                { label: "Role", value: cs.role },
+                { label: "Timeline", value: cs.timeline },
+                { label: "Team", value: cs.team },
+                { label: "Year", value: cs.year },
+              ].map(({ label, value }) => (
+                <div key={label}>
+                  <dt style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", color: "#999", textTransform: "uppercase" as const }}>
+                    {label}
+                  </dt>
+                  <dd style={{ fontSize: "16px", fontWeight: 500, color: "#0F0F0F", marginTop: "4px" }}>
+                    {value}
+                  </dd>
+                </div>
+              ))}
+            </motion.dl>
+
+            {/* Bottom card — Key Results */}
+            <motion.div
+              variants={item}
+              style={{
+                backgroundColor: "#FFFFFF",
+                borderRadius: "12px",
+                padding: "28px",
+                border: "1px solid #E8E8E8",
+              }}
+            >
+              <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#999", textAlign: "center", marginBottom: "24px" }}>
+                Key Results
+              </p>
+              <div style={{ display: "flex" }}>
+                {cs.metrics.map((m, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      flex: 1,
+                      textAlign: "center",
+                      borderLeft: i > 0 ? "1px solid #E8E8E8" : undefined,
+                      padding: "0 8px",
+                    }}
+                  >
+                    <p style={{ fontSize: "44px", fontWeight: 800, color: "#0F0F0F", lineHeight: 1 }}>{m.value}</p>
+                    <p style={{ fontSize: "13px", color: "#999", textAlign: "center", lineHeight: 1.4, marginTop: "8px", maxWidth: "140px", margin: "8px auto 0" }}>{m.label}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+          </motion.div>
+        </div>
       </motion.div>
 
       {/* MobileTOC appears after the statistics */}
