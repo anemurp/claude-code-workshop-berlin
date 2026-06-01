@@ -7,9 +7,9 @@ import { caseStudies } from "../case-studies";
 export default function Home() {
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6">
-        <Hero />
+      <Hero />
 
+      <main className="mx-auto max-w-3xl px-6">
         <section id="work" style={{ paddingTop: 32 }}>
           <h2 style={{ marginBottom: 24, fontSize: 28 }}>
             Selected Work

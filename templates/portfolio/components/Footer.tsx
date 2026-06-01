@@ -230,7 +230,7 @@ export function Footer() {
       </AnimatePresence>
     </div>
 
-    <footer style={{ backgroundColor: "#F5F0E8" }} className="relative overflow-hidden">
+    <footer style={{ backgroundColor: "#F0EEF8" }} className="relative overflow-hidden">
         <DotCluster className="absolute top-24 left-[6%] opacity-[0.15] pointer-events-none" />
         <DotCluster className="absolute top-44 left-[52%] opacity-[0.12] pointer-events-none" />
         <DotCluster className="absolute bottom-24 left-[28%] opacity-[0.14] pointer-events-none" />

@@ -48,7 +48,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2022",
     description:
       "Designed the inline review pattern now used by 30+ million developers. Started as a hack-week prototype, became a flagship feature.",
-    thumbnail: "",
+    thumbnail: "/case-studies/New-lit.png",
     tags: ["Product Design", "Developer Tools", "Interaction Design"],
     overview:
       "GitLab's merge request review flow required users to leave context to add comments — a constant interruption to the reading flow. The 30+ million developers using GitLab each week were losing time to a UI pattern that made review feel harder than it needed to be.",

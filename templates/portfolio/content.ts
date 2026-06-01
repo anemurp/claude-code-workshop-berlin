@@ -6,7 +6,7 @@
 
 export const hero = {
   name: "Anna Murphy",
-  role: "Product Designer",
+  role: "Senior Product Designer",
   line2: "bridging people,",
   line3: "research & AI",
   location: "Berlin, Germany",
@@ -217,6 +217,6 @@ export const tickerRow2 = [
 ];
 
 export const meta = {
-  title: "Anna Murphy — Product Designer",
+  title: "Anna Murphy — Senior Product Designer",
   description: "Berlin-based product designer. Currently at Tide.",
 };
