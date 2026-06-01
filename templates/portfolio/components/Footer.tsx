@@ -1,26 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { contact, hero } from "../content";
 import { ButterflyAnimation } from "./ButterflyAnimation";
 
 const CONFETTI = [
-  { x: -220, y: -140, rotate: 45,   color: "#E8612A", delay: 0.00, w: 14, h: 9  },
-  { x:  230, y: -160, rotate: -30,  color: "#1B2A6B", delay: 0.02, w: 10, h: 14 },
+  { x: -220, y: -140, rotate: 45,   color: "#E8392A", delay: 0.00, w: 14, h: 9  },
+  { x:  230, y: -160, rotate: -30,  color: "#1A2FD4", delay: 0.02, w: 10, h: 14 },
   { x: -140, y: -220, rotate: 20,   color: "#F5EDD6", delay: 0.01, w: 12, h: 8  },
-  { x:  260, y: -100, rotate: 60,   color: "#E8612A", delay: 0.03, w: 9,  h: 13 },
-  { x: -270, y: -90,  rotate: -60,  color: "#1B6B6B", delay: 0.01, w: 13, h: 8  },
-  { x:  160, y: -250, rotate: 15,   color: "#1B2A6B", delay: 0.04, w: 10, h: 11 },
-  { x:   20, y: -280, rotate: -45,  color: "#E8612A", delay: 0.00, w: 15, h: 10 },
-  { x: -100, y: -200, rotate: 90,   color: "#1B6B6B", delay: 0.05, w: 9,  h: 14 },
+  { x:  260, y: -100, rotate: 60,   color: "#E8392A", delay: 0.03, w: 9,  h: 13 },
+  { x: -270, y: -90,  rotate: -60,  color: "#0D7A6B", delay: 0.01, w: 13, h: 8  },
+  { x:  160, y: -250, rotate: 15,   color: "#1A2FD4", delay: 0.04, w: 10, h: 11 },
+  { x:   20, y: -280, rotate: -45,  color: "#E8392A", delay: 0.00, w: 15, h: 10 },
+  { x: -100, y: -200, rotate: 90,   color: "#0D7A6B", delay: 0.05, w: 9,  h: 14 },
   { x:   90, y: -240, rotate: -20,  color: "#F5EDD6", delay: 0.02, w: 12, h: 10 },
-  { x: -190, y: -130, rotate: 130,  color: "#E8612A", delay: 0.03, w: 11, h: 13 },
-  { x:  200, y: -120, rotate: -90,  color: "#1B2A6B", delay: 0.01, w: 13, h: 9  },
-  { x:  -50, y: -300, rotate: 30,   color: "#1B6B6B", delay: 0.04, w: 9,  h: 12 },
-  { x:  300, y: -50,  rotate: 75,   color: "#E8612A", delay: 0.02, w: 11, h: 8  },
+  { x: -190, y: -130, rotate: 130,  color: "#E8392A", delay: 0.03, w: 11, h: 13 },
+  { x:  200, y: -120, rotate: -90,  color: "#1A2FD4", delay: 0.01, w: 13, h: 9  },
+  { x:  -50, y: -300, rotate: 30,   color: "#0D7A6B", delay: 0.04, w: 9,  h: 12 },
+  { x:  300, y: -50,  rotate: 75,   color: "#E8392A", delay: 0.02, w: 11, h: 8  },
   { x: -300, y: -60,  rotate: -75,  color: "#F5EDD6", delay: 0.03, w: 8,  h: 11 },
-  { x:  120, y: -280, rotate: 110,  color: "#1B2A6B", delay: 0.01, w: 14, h: 9  },
-  { x: -160, y: -260, rotate: -110, color: "#E8612A", delay: 0.05, w: 10, h: 13 },
+  { x:  120, y: -280, rotate: 110,  color: "#1A2FD4", delay: 0.01, w: 14, h: 9  },
+  { x: -160, y: -260, rotate: -110, color: "#E8392A", delay: 0.05, w: 10, h: 13 },
 ];
 
 function CopiedAnimation() {
@@ -50,12 +50,12 @@ function CopiedAnimation() {
           transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
         >
           <svg width="100" height="72" viewBox="0 0 100 72" fill="none">
-            <rect x="0" y="24" width="100" height="48" rx="3" fill="#F5EDD6" stroke="#E8612A" strokeWidth="2" />
-            <path d="M0 24 L50 52 L100 24" stroke="#E8612A" strokeWidth="1.2" opacity="0.35" />
+            <rect x="0" y="24" width="100" height="48" rx="3" fill="#F5EDD6" stroke="#E8392A" strokeWidth="2" />
+            <path d="M0 24 L50 52 L100 24" stroke="#E8392A" strokeWidth="1.2" opacity="0.35" />
             <motion.path
               d="M2 24 L50 2 L98 24 Z"
               fill="#EDE4CC"
-              stroke="#E8612A"
+              stroke="#E8392A"
               strokeWidth="2"
               strokeLinejoin="round"
               style={{ transformOrigin: "50px 24px" }}
@@ -76,7 +76,7 @@ function CopiedAnimation() {
               className="bg-white rounded-sm shadow-lg px-4 py-2 text-center whitespace-nowrap"
               style={{ border: "1.5px solid #e5e5e5", minWidth: 80 }}
             >
-              <span className="text-xs font-bold" style={{ color: "#1B2A6B" }}>Copied!</span>
+              <span className="text-xs font-bold" style={{ color: "#1A2FD4" }}>Copied!</span>
             </div>
           </motion.div>
         </motion.div>
@@ -98,21 +98,21 @@ function LinkedInIcon() {
 function DotCluster({ className }: { className?: string }) {
   return (
     <svg width="80" height="80" viewBox="0 0 80 80" fill="none" className={className} aria-hidden="true">
-      <circle cx="20" cy="18" r="2.5" fill="#E8612A" style={{ animation: "twinkle 2.1s ease-in-out infinite", animationDelay: "0.0s" }} />
-      <circle cx="30" cy="12" r="1.5" fill="#E8612A" style={{ animation: "twinkle 3.4s ease-in-out infinite", animationDelay: "0.5s" }} />
-      <circle cx="38" cy="20" r="2"   fill="#E8612A" style={{ animation: "twinkle 2.7s ease-in-out infinite", animationDelay: "1.1s" }} />
-      <circle cx="14" cy="28" r="1.5" fill="#E8612A" style={{ animation: "twinkle 3.9s ease-in-out infinite", animationDelay: "0.3s" }} />
-      <circle cx="26" cy="32" r="2"   fill="#E8612A" style={{ animation: "twinkle 2.4s ease-in-out infinite", animationDelay: "1.8s" }} />
-      <circle cx="42" cy="15" r="1.5" fill="#E8612A" style={{ animation: "twinkle 3.1s ease-in-out infinite", animationDelay: "0.7s" }} />
-      <circle cx="10" cy="20" r="2"   fill="#E8612A" style={{ animation: "twinkle 2.8s ease-in-out infinite", animationDelay: "2.2s" }} />
-      <circle cx="32" cy="26" r="1.5" fill="#E8612A" style={{ animation: "twinkle 4.2s ease-in-out infinite", animationDelay: "0.2s" }} />
-      <circle cx="46" cy="28" r="2"   fill="#E8612A" style={{ animation: "twinkle 2.5s ease-in-out infinite", animationDelay: "1.4s" }} />
-      <circle cx="22" cy="40" r="1.5" fill="#E8612A" style={{ animation: "twinkle 3.6s ease-in-out infinite", animationDelay: "0.9s" }} />
-      <circle cx="50" cy="38" r="2"   fill="#E8612A" style={{ animation: "twinkle 2.2s ease-in-out infinite", animationDelay: "2.6s" }} />
-      <circle cx="12" cy="38" r="1.5" fill="#E8612A" style={{ animation: "twinkle 3.3s ease-in-out infinite", animationDelay: "0.4s" }} />
-      <circle cx="18" cy="10" r="1.5" fill="#E8612A" style={{ animation: "twinkle 4.0s ease-in-out infinite", animationDelay: "1.6s" }} />
-      <circle cx="44" cy="10" r="2"   fill="#E8612A" style={{ animation: "twinkle 2.9s ease-in-out infinite", animationDelay: "0.1s" }} />
-      <circle cx="36" cy="36" r="1.5" fill="#E8612A" style={{ animation: "twinkle 3.7s ease-in-out infinite", animationDelay: "2.0s" }} />
+      <circle cx="20" cy="18" r="2.5" fill="#E8392A" style={{ animation: "twinkle 2.1s ease-in-out infinite", animationDelay: "0.0s" }} />
+      <circle cx="30" cy="12" r="1.5" fill="#E8392A" style={{ animation: "twinkle 3.4s ease-in-out infinite", animationDelay: "0.5s" }} />
+      <circle cx="38" cy="20" r="2"   fill="#E8392A" style={{ animation: "twinkle 2.7s ease-in-out infinite", animationDelay: "1.1s" }} />
+      <circle cx="14" cy="28" r="1.5" fill="#E8392A" style={{ animation: "twinkle 3.9s ease-in-out infinite", animationDelay: "0.3s" }} />
+      <circle cx="26" cy="32" r="2"   fill="#E8392A" style={{ animation: "twinkle 2.4s ease-in-out infinite", animationDelay: "1.8s" }} />
+      <circle cx="42" cy="15" r="1.5" fill="#E8392A" style={{ animation: "twinkle 3.1s ease-in-out infinite", animationDelay: "0.7s" }} />
+      <circle cx="10" cy="20" r="2"   fill="#E8392A" style={{ animation: "twinkle 2.8s ease-in-out infinite", animationDelay: "2.2s" }} />
+      <circle cx="32" cy="26" r="1.5" fill="#E8392A" style={{ animation: "twinkle 4.2s ease-in-out infinite", animationDelay: "0.2s" }} />
+      <circle cx="46" cy="28" r="2"   fill="#E8392A" style={{ animation: "twinkle 2.5s ease-in-out infinite", animationDelay: "1.4s" }} />
+      <circle cx="22" cy="40" r="1.5" fill="#E8392A" style={{ animation: "twinkle 3.6s ease-in-out infinite", animationDelay: "0.9s" }} />
+      <circle cx="50" cy="38" r="2"   fill="#E8392A" style={{ animation: "twinkle 2.2s ease-in-out infinite", animationDelay: "2.6s" }} />
+      <circle cx="12" cy="38" r="1.5" fill="#E8392A" style={{ animation: "twinkle 3.3s ease-in-out infinite", animationDelay: "0.4s" }} />
+      <circle cx="18" cy="10" r="1.5" fill="#E8392A" style={{ animation: "twinkle 4.0s ease-in-out infinite", animationDelay: "1.6s" }} />
+      <circle cx="44" cy="10" r="2"   fill="#E8392A" style={{ animation: "twinkle 2.9s ease-in-out infinite", animationDelay: "0.1s" }} />
+      <circle cx="36" cy="36" r="1.5" fill="#E8392A" style={{ animation: "twinkle 3.7s ease-in-out infinite", animationDelay: "2.0s" }} />
     </svg>
   );
 }
@@ -130,47 +130,47 @@ function PatternBand() {
     >
       <path
         d="M0,38 C180,22 360,52 540,35 C720,18 900,48 1080,32 C1260,16 1360,42 1440,38"
-        stroke="#E8612A"
+        stroke="#E8392A"
         strokeWidth="1.5"
         opacity="0.7"
         style={{ animation: "wave-bob 4s ease-in-out infinite", animationDelay: "0s" }}
       />
       <path
         d="M0,58 C200,44 380,68 560,54 C740,40 920,64 1100,50 C1280,38 1370,58 1440,55"
-        stroke="#E8612A"
+        stroke="#E8392A"
         strokeWidth="1.5"
         opacity="0.45"
         style={{ animation: "wave-bob 5s ease-in-out infinite", animationDelay: "0.8s" }}
       />
       <path
         d="M0,22 C160,10 340,38 520,22 C700,6 880,35 1060,20 C1240,6 1360,24 1440,20"
-        stroke="#1B6B6B"
+        stroke="#0D7A6B"
         strokeWidth="1.5"
         opacity="0.7"
         style={{ animation: "wave-bob 6s ease-in-out infinite", animationDelay: "0.4s" }}
       />
       <path
         d="M0,75 C220,62 420,82 620,70 C820,58 1020,78 1220,65 C1340,56 1400,72 1440,70"
-        stroke="#1B6B6B"
+        stroke="#0D7A6B"
         strokeWidth="1.5"
         opacity="0.4"
         style={{ animation: "wave-bob 4.5s ease-in-out infinite", animationDelay: "1.2s" }}
       />
-      <circle cx="180" cy="28" r="2"   fill="#E8612A" opacity="0.6" />
-      <circle cx="188" cy="22" r="1.5" fill="#E8612A" opacity="0.5" />
-      <circle cx="174" cy="35" r="1.5" fill="#E8612A" opacity="0.4" />
-      <circle cx="520" cy="50" r="2"   fill="#1B6B6B" opacity="0.7" />
-      <circle cx="528" cy="44" r="1.5" fill="#1B6B6B" opacity="0.5" />
-      <circle cx="514" cy="57" r="1.5" fill="#1B6B6B" opacity="0.4" />
-      <circle cx="860" cy="30" r="2"   fill="#E8612A" opacity="0.6" />
-      <circle cx="868" cy="24" r="1.5" fill="#E8612A" opacity="0.5" />
-      <circle cx="854" cy="37" r="1.5" fill="#E8612A" opacity="0.4" />
-      <circle cx="1200" cy="55" r="2"  fill="#1B6B6B" opacity="0.7" />
-      <circle cx="1208" cy="49" r="1.5" fill="#1B6B6B" opacity="0.5" />
-      <circle cx="1194" cy="62" r="1.5" fill="#1B6B6B" opacity="0.4" />
-      <circle cx="350" cy="16" r="1.5" fill="#E8612A" opacity="0.5" />
-      <circle cx="700" cy="70" r="1.5" fill="#1B6B6B" opacity="0.5" />
-      <circle cx="1050" cy="18" r="2"  fill="#E8612A" opacity="0.55" />
+      <circle cx="180" cy="28" r="2"   fill="#E8392A" opacity="0.6" />
+      <circle cx="188" cy="22" r="1.5" fill="#E8392A" opacity="0.5" />
+      <circle cx="174" cy="35" r="1.5" fill="#E8392A" opacity="0.4" />
+      <circle cx="520" cy="50" r="2"   fill="#0D7A6B" opacity="0.7" />
+      <circle cx="528" cy="44" r="1.5" fill="#0D7A6B" opacity="0.5" />
+      <circle cx="514" cy="57" r="1.5" fill="#0D7A6B" opacity="0.4" />
+      <circle cx="860" cy="30" r="2"   fill="#E8392A" opacity="0.6" />
+      <circle cx="868" cy="24" r="1.5" fill="#E8392A" opacity="0.5" />
+      <circle cx="854" cy="37" r="1.5" fill="#E8392A" opacity="0.4" />
+      <circle cx="1200" cy="55" r="2"  fill="#0D7A6B" opacity="0.7" />
+      <circle cx="1208" cy="49" r="1.5" fill="#0D7A6B" opacity="0.5" />
+      <circle cx="1194" cy="62" r="1.5" fill="#0D7A6B" opacity="0.4" />
+      <circle cx="350" cy="16" r="1.5" fill="#E8392A" opacity="0.5" />
+      <circle cx="700" cy="70" r="1.5" fill="#0D7A6B" opacity="0.5" />
+      <circle cx="1050" cy="18" r="2"  fill="#E8392A" opacity="0.55" />
     </svg>
   );
 }
@@ -178,6 +178,18 @@ function PatternBand() {
 export function Footer() {
   const linkedInHref = contact.socials.find((s) => s.label === "LinkedIn")?.href ?? "#";
   const [copied, setCopied] = useState(false);
+  const [emailHovered, setEmailHovered] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${e.clientX - 52}px, ${e.clientY - 52}px)`;
+      }
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
 
   function copyEmail() {
     const el = document.createElement("textarea");
@@ -193,7 +205,32 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-cobalt relative overflow-hidden">
+    <>
+    {/* Custom email cursor */}
+    <div ref={cursorRef} style={{ position: "fixed", top: 0, left: 0, zIndex: 999, pointerEvents: "none", willChange: "transform" }}>
+      <AnimatePresence>
+        {emailHovered && (
+          <motion.div
+            key="email-cursor"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              width: 104, height: 104, borderRadius: "50%",
+              backgroundColor: "white", color: "#0F0F0F",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 11, fontWeight: 600, textAlign: "center",
+              lineHeight: 1.4, padding: "0 14px",
+            }}
+          >
+            Copy email
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+
+    <footer style={{ backgroundColor: "#F5F0E8" }} className="relative overflow-hidden">
         <DotCluster className="absolute top-24 left-[6%] opacity-[0.15] pointer-events-none" />
         <DotCluster className="absolute top-44 left-[52%] opacity-[0.12] pointer-events-none" />
         <DotCluster className="absolute bottom-24 left-[28%] opacity-[0.14] pointer-events-none" />
@@ -210,30 +247,23 @@ export function Footer() {
                 <AnimatePresence>{copied && <CopiedAnimation />}</AnimatePresence>
                 <button
                   onClick={copyEmail}
-                  className="block font-display text-cream hover:text-terracotta transition-colors cursor-pointer text-left"
-                  style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: "1.15" }}
+                  onMouseEnter={() => setEmailHovered(true)}
+                  onMouseLeave={() => setEmailHovered(false)}
+                  className="block font-display text-left"
+                  style={{ fontSize: "clamp(28px, 4vw, 52px)", lineHeight: "1.15", cursor: emailHovered ? "none" : "pointer", color: "#0F0F0F" }}
                 >
                   {contact.email}
                 </button>
               </div>
 
-              <p className="mt-4 text-sm leading-relaxed text-periwinkle">
+              <p className="mt-4 text-sm leading-relaxed" style={{ color: "#666666" }}>
                 I design for the people who were never considered in the first draft.
               </p>
 
               <div className="mt-5 flex items-center gap-5">
-                <a
-                  href={linkedInHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-cream hover:text-terracotta transition-colors"
-                >
-                  <LinkedInIcon />
-                  LinkedIn
-                </a>
               </div>
 
-              <p className="mt-8 text-sm text-periwinkle">{hero.name} &copy; 2026</p>
+              <p className="mt-8 text-sm" style={{ color: "#999999" }}>{hero.name} &copy; 2026</p>
             </div>
 
             {/* Right column — butterfly */}
@@ -244,5 +274,6 @@ export function Footer() {
           </div>
         </div>
       </footer>
+    </>
   );
 }

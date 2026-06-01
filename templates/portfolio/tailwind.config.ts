@@ -19,12 +19,12 @@ const config: Config = {
         primary: "#5B5BD6",
         coral: "#FF6B4A",
         // Footer palette
-        cobalt: "#1B2A6B",
+        cobalt: "#1A2FD4",
         "cobalt-light": "#2D3D7A",
         cream: "#F5EDD6",
         periwinkle: "#A8B8E8",
-        terracotta: "#E8612A",
-        teal: "#1B6B6B",
+        terracotta: "#E8392A",
+        teal: "#0D7A6B",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Download, Menu, X } from "lucide-react";
+import { Download, Menu, X, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { hero } from "../content";
 import { Button } from "./ui/Button";
@@ -16,6 +16,14 @@ const navLinks = [
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  function copyEmail() {
+    navigator.clipboard.writeText("anemurp@gmail.com").then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
 
   // Close on route change
   useEffect(() => { setOpen(false); }, [pathname]);
@@ -59,6 +67,34 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
+            <button
+              onClick={copyEmail}
+              aria-label="Copy email address"
+              className="relative transition-opacity hover:opacity-70"
+              style={{ color: "#1A2FD4", display: "flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+            >
+              <Mail size={20} />
+              {copied && (
+                <span
+                  className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded whitespace-nowrap"
+                  style={{ backgroundColor: "#1A2FD4", color: "#fff" }}
+                >
+                  Copied!
+                </span>
+              )}
+            </button>
+            <a
+              href={hero.ctaPrimary.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="transition-opacity hover:opacity-70"
+              style={{ color: "#1A2FD4", display: "flex", alignItems: "center" }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
             <Button href="/resume.pdf" variant="secondary" className="!h-auto py-1.5 px-4 text-sm shrink-0" target="_blank" rel="noopener noreferrer">
               <Download size={14} className="mr-1.5" />
               Resume
@@ -120,6 +156,30 @@ export function Navbar() {
                     </Link>
                   </li>
                 ))}
+                <li style={{ borderBottom: "1px solid #F0F0F0" }}>
+                  <button
+                    onClick={() => { copyEmail(); setOpen(false); }}
+                    className="flex items-center gap-2 w-full text-left"
+                    style={{ fontSize: 18, fontWeight: 500, color: "#0F0F0F", padding: "14px 0", background: "none", border: "none", cursor: "pointer" }}
+                  >
+                    {copied ? "Copied!" : "Email"} <Mail size={18} color="#1A2FD4" />
+                  </button>
+                </li>
+                <li style={{ borderBottom: "1px solid #F0F0F0" }}>
+                  <a
+                    href={hero.ctaPrimary.href}
+                    className="flex items-center gap-2"
+                    style={{ fontSize: 18, fontWeight: 500, color: "#0F0F0F", padding: "14px 0" }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
+                  >
+                    LinkedIn
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </a>
+                </li>
                 <li>
                   <a
                     href="/resume.pdf"

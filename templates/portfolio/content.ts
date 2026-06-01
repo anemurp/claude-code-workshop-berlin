@@ -8,7 +8,7 @@ export const hero = {
   name: "Anna Murphy",
   role: "Product Designer",
   location: "Berlin, Germany",
-  availability: "Senior UX & Product Designer · AI Enthusiast · SaaS, B2B2C",
+  availability: "based in berlin",
   tagline: "Design that turns complexity into clarity",
   headline:
     "Former teacher. Current designer. I understand how people learn, not just how they click.",
@@ -98,19 +98,67 @@ export const skills = {
 };
 
 export const testimonials = {
-  heading: "What people say",
+  heading: "What my team members say",
   quotes: [
     {
-      text:
-        "Anna is rare. She holds the long-term product vision and the pixel-level craft in the same head, and shifts between them without losing either.",
-      author: "Lukas Weber",
-      role: "Head of Product, Tide",
+      name: "Zoe",
+      role: "Lead Engineer",
+      company: "McGraw Hill",
+      quote:
+        "You are always curious and considerate about the users and always open and engaging with all working partners (engineers, TPMs, product people, designers, a11y people, etc). You do the work of 2 people for 2 teams. I don't know how you did it, but I am very glad that I got to work with you on them!",
+      highlight: "You do the work of 2 people for 2 teams.",
+      avatarColor: "#1A2FD4",
+      cardColor: "#C4CCFA",
     },
     {
-      text:
-        "Working with Anna recalibrated how our whole team thinks about review. She has an instinct for what's actually friction versus what just feels like friction.",
-      author: "Sara Patel",
-      role: "Engineering Manager, GitLab",
+      name: "Marybeth Burris",
+      role: "Director of Instructional Design",
+      company: "McGraw Hill",
+      quote:
+        "This just in... vendor expense at $2 per passage upload for a total of $1,546.00. It's peanuts! Because you made it so easy. This saves me loads of cash for other vendor work I need.",
+      highlight: "Because you made it so easy.",
+      avatarColor: "#E8392A",
+      cardColor: "#CABEFA",
+    },
+    {
+      name: "Eden Ames",
+      role: "UX Manager",
+      company: "McGraw Hill",
+      quote:
+        "Anna has a high-level of empathy that comes through in everything she does, whether it's asking authors about their processes, seeking feasibility feedback from engineers, or designing delightful user experiences that make for seamless handoff to developers. And she does it all while working across multiple teams.",
+      highlight: "Anna has a high-level of empathy that comes through in everything she does.",
+      avatarColor: "#0D7A6B",
+      cardColor: "#C8BEFA",
+    },
+    {
+      name: "Rudy Sharar",
+      role: "Technical Product Manager",
+      company: "McGraw Hill",
+      quote:
+        "Anna crushed the UXR of the long passage activity, student experience from discovery to design, to conducting interviews and synthesizing findings with clarity.",
+      highlight: "synthesizing findings with clarity.",
+      avatarColor: "#6B5FE8",
+      cardColor: "#BAD4FA",
+    },
+    {
+      name: "Sandy Tanguay",
+      role: "Product Manager",
+      company: "McGraw Hill",
+      quote:
+        "You were so patient and persistent when we were working through the Teacher Report Improvements while also planning all the BBA version of the reports while being new to Ceres. The results were spot on and appreciated.",
+      highlight: "patient and persistent.",
+      avatarColor: "#2A7A1A",
+      cardColor: "#D4BAFA",
+    },
+    {
+      name: "Karlina Maya",
+      role: "UX Intern",
+      company: "McGraw Hill",
+      quote:
+        "I will always value the mentorship you've given me during this early stage of my career. Your creativity, talent, and passion for what you do is inspiring!",
+      highlight: "Your creativity, talent, and passion for what you do is inspiring!",
+      avatarColor: "#C4521A",
+      cardColor: "#C4CCFA",
     },
   ],
 };

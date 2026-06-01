@@ -62,7 +62,7 @@ function BrowserMockup({ image, label }: { image?: string; label?: string }) {
         ) : (
           <div
             className="w-full h-full flex items-center justify-center"
-            style={{ background: "linear-gradient(135deg, #1B2A6B 0%, #E8612A 100%)" }}
+            style={{ background: "linear-gradient(135deg, #1A2FD4 0%, #E8392A 100%)" }}
           >
             <span
               className="font-bold text-white text-center px-8"
@@ -524,7 +524,7 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
                   ) : (
                     <div
                       className="w-full h-full flex items-center justify-center"
-                      style={{ background: "linear-gradient(135deg, #1B2A6B 0%, #E8612A 100%)" }}
+                      style={{ background: "linear-gradient(135deg, #1A2FD4 0%, #E8392A 100%)" }}
                     >
                       <span
                         className="font-bold text-white text-center px-4"

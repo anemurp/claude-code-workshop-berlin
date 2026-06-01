@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 
-const PALETTE = ["#1B2A6B", "#E8612A", "#1B6B6B", "#7F77DD", "#3D6B35", "#C4521A", "#2B4A8C"];
+const PALETTE = ["#1A2FD4", "#E8392A", "#0D7A6B", "#6B5FE8", "#2A7A1A", "#F5820A"];
 const SPRING = "cubic-bezier(0.34,1.56,0.64,1)";
 const LETTERS = "complexity".split("");
 
@@ -53,7 +53,7 @@ function DesignWord({ isTouch, onFirstHover, isActive, onActivate }: WordProps) 
           userSelect: "none",
           fontFamily: active ? "var(--font-caveat), cursive" : "Inter, ui-sans-serif, sans-serif",
           fontWeight: active ? 700 : 500,
-          color: active ? "#E8612A" : "inherit",
+          color: active ? "#E8392A" : "inherit",
           transform: active ? "rotate(-2deg) scale(1.08)" : "rotate(0deg) scale(1)",
           letterSpacing: active ? "0.02em" : "inherit",
           transition: `color 0.25s ease, transform 0.35s ${SPRING}`,
@@ -187,7 +187,7 @@ function ClarityWord({ isTouch, onFirstHover, isActive, onActivate }: WordProps)
           top: 0, left: 0, right: 0,
           textAlign: "center",
           userSelect: "none",
-          color: active ? "#1B6B6B" : "inherit",
+          color: active ? "#0D7A6B" : "inherit",
           transform: active ? "scale(1.16)" : "scale(1)",
           letterSpacing: active ? "0.06em" : "inherit",
           transition: `transform 0.35s ${SPRING}, color 0.25s ease, letter-spacing 0.25s ease`,
@@ -249,7 +249,7 @@ export function InteractiveHeadline() {
       >
         <DesignWord {...wp("design")} />
         <SimpleWord {...wp("that")} hoverColor="#B4B2A9" hoverTransform="scale(0.88) rotate(4deg)">that</SimpleWord>
-        <SimpleWord {...wp("turns")} hoverColor="#1B2A6B" hoverTransform="rotate(-180deg) scale(1.05)">turns</SimpleWord>
+        <SimpleWord {...wp("turns")} hoverColor="#1A2FD4" hoverTransform="rotate(-180deg) scale(1.05)">turns</SimpleWord>
         <ComplexityWord {...wp("complexity")} />
         <SimpleWord {...wp("into")} hoverColor="#B4B2A9" hoverTransform="scale(0.82) rotate(-3deg)">into</SimpleWord>
         <ClarityWord {...wp("clarity")} />

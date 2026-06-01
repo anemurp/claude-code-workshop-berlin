@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -19,19 +19,53 @@ function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
 
+const COLORS = ["#C8B40A", "#FFD700", "#FFF176", "#F5C518", "#E8D44D", "#ffffff"];
+
+type Sparkle = { id: number; x: number; y: number; size: number; rotate: number; dx: number; dy: number; color: string; duration: number };
+
+function makeSparkle(id: number, x: number, y: number): Sparkle {
+  const angle = Math.random() * Math.PI * 2;
+  const dist = 20 + Math.random() * 40;
+  return {
+    id,
+    x: x + (Math.random() - 0.5) * 16,
+    y: y + (Math.random() - 0.5) * 16,
+    size: 5 + Math.random() * 13,
+    rotate: Math.random() * 360,
+    dx: Math.cos(angle) * dist,
+    dy: Math.sin(angle) * dist - 10,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    duration: 0.5 + Math.random() * 0.4,
+  };
+}
+
 export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
-  const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [hoveredArrow, setHoveredArrow] = useState<string | null>(null);
+  const [sparkles, setSparkles] = useState<Sparkle[]>([]);
 
-  const positionRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
   const target = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
   const rafId = useRef<number>(0);
+  const hoveredCardRef = useRef<string | null>(null);
+  const sparkleCounter = useRef(0);
+  const lastSparkle = useRef(0);
+
+  useEffect(() => { hoveredCardRef.current = hoveredCard; }, [hoveredCard]);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       target.current = { x: e.clientX, y: e.clientY };
+      const now = Date.now();
+      if (hoveredCardRef.current && now - lastSparkle.current > 20) {
+        lastSparkle.current = now;
+        const batch = Array.from({ length: 3 }, () => makeSparkle(sparkleCounter.current++, e.clientX, e.clientY));
+        setSparkles(prev => [...prev, ...batch]);
+        const maxDuration = Math.max(...batch.map(s => s.duration)) * 1000 + 100;
+        const ids = batch.map(s => s.id);
+        setTimeout(() => setSparkles(prev => prev.filter(s => !ids.includes(s.id))), maxDuration);
+      }
     };
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
@@ -41,11 +75,8 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
     const tick = () => {
       current.current.x = lerp(current.current.x, target.current.x, LERP);
       current.current.y = lerp(current.current.y, target.current.y, LERP);
-      if (positionRef.current) {
-        positionRef.current.style.transform = `translate(
-          calc(${current.current.x}px + 20px),
-          calc(${current.current.y}px - 55%)
-        )`;
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${current.current.x - 65}px, ${current.current.y - 65}px)`;
       }
       rafId.current = requestAnimationFrame(tick);
     };
@@ -53,63 +84,79 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
     return () => cancelAnimationFrame(rafId.current);
   }, []);
 
-  const handleEnter = useCallback((slug: string) => {
-    current.current = { ...target.current };
-    setActiveSlug(slug);
-  }, []);
-
-  const handleLeave = useCallback(() => setActiveSlug(null), []);
-
-  const active = studies.find((s) => s.slug === activeSlug);
-
   return (
     <>
-      {/* Cursor preview */}
+      {/* Custom circle cursor */}
       <div
-        ref={positionRef}
+        ref={cursorRef}
         className="fixed top-0 left-0 z-50 pointer-events-none"
         style={{ willChange: "transform" }}
       >
         <AnimatePresence>
-          {active && (
+          {hoveredCard && (
             <motion.div
-              key={active.slug}
-              className="w-72 rounded-2xl overflow-hidden shadow-2xl"
-              style={{ aspectRatio: "16/10" }}
-              initial={{ opacity: 0, scale: 0.8 }}
+              key="cursor-label"
+              initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.85 }}
-              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              {active.thumbnail ? (
-                <img
-                  src={active.thumbnail}
-                  alt={active.title}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div
-                  className="w-full h-full flex items-center justify-center"
-                  style={{
-                    background: "linear-gradient(135deg, #1B2A6B 0%, #E8612A 100%)",
-                  }}
+              <svg width="130" height="130" viewBox="0 0 130 130" style={{ display: "block" }}>
+                <motion.g
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  style={{ transformOrigin: "65px 65px" }}
                 >
-                  <span className="text-sm font-semibold text-center px-4" style={{ color: "rgba(255,255,255,0.3)" }}>
-                    {active.title}
-                  </span>
-                </div>
-              )}
+                  <polygon
+                    points="65,5 75.7,39.1 109.5,20.5 90.9,54.3 125,65 90.9,75.7 109.5,109.5 75.7,90.9 65,125 54.3,90.9 20.5,109.5 39.1,75.7 5,65 39.1,54.3 20.5,20.5 54.3,39.1"
+                    fill="#FFE600"
+                  />
+                </motion.g>
+                <text x="65" y="61" textAnchor="middle" fill="black" fontSize="11" fontWeight="500" fontFamily="Inter, sans-serif">Read case</text>
+                <text x="65" y="75" textAnchor="middle" fill="black" fontSize="11" fontWeight="500" fontFamily="Inter, sans-serif">study</text>
+              </svg>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
+      {/* Sparkle trail */}
+      {sparkles.map(s => (
+        <motion.div
+          key={s.id}
+          initial={{ opacity: 1, scale: 0, x: 0, y: 0, rotate: s.rotate }}
+          animate={{
+            opacity: [1, 1, 0],
+            scale: [0, 1.4, 0],
+            x: s.dx,
+            y: s.dy,
+            rotate: s.rotate + (s.id % 2 === 0 ? 180 : -180),
+          }}
+          transition={{ duration: s.duration, ease: "easeOut" }}
+          style={{
+            position: "fixed",
+            left: s.x - s.size / 2,
+            top: s.y - s.size / 2,
+            pointerEvents: "none",
+            zIndex: 48,
+          }}
+        >
+          <svg width={s.size} height={s.size} viewBox="0 0 10 10">
+            <polygon points="5,0 5.9,3.8 10,5 5.9,6.2 5,10 4.1,6.2 0,5 4.1,3.8" fill={s.color} />
+          </svg>
+        </motion.div>
+      ))}
+
       {/* Card list */}
-      <ul className="space-y-6">
+      <ul className="space-y-24">
         {studies.map((cs) => (
           <li
             key={cs.slug}
-            onMouseEnter={() => setHoveredCard(cs.slug)}
+            className="case-study-card"
+            onMouseEnter={() => {
+              current.current = { ...target.current };
+              setHoveredCard(cs.slug);
+            }}
             onMouseLeave={() => setHoveredCard(null)}
             style={{
               borderRadius: "16px",
@@ -142,7 +189,7 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
                   <div
                     className="w-full h-full flex items-center justify-center"
                     style={{
-                      background: "linear-gradient(135deg, #1B2A6B 0%, #E8612A 100%)",
+                      background: "linear-gradient(135deg, #1A2FD4 0%, #E8392A 100%)",
                     }}
                   >
                     <span
@@ -160,10 +207,8 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
                 {/* Title row */}
                 <div className="flex items-baseline justify-between gap-4">
                   <h3
-                    className="text-xl font-semibold transition"
+                    className="text-xl font-semibold"
                     style={{ color: "var(--text)" }}
-                    onMouseEnter={() => handleEnter(cs.slug)}
-                    onMouseLeave={handleLeave}
                   >
                     {cs.title}
                   </h3>

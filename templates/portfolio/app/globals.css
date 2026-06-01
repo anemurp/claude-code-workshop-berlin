@@ -3,14 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --bg: #F2F2F2;
+  --bg: #F5F5F0;
   --text: #0F0F0F;
   --card-bg: #ffffff;
   --muted: #666666;
   --accent: #0F0F0F;
-  --accent-coral: #E8612A;
-  --accent-cobalt: #1B2A6B;
-  --accent-teal: #1B6B6B;
+  --accent-coral: #E8392A;
+  --accent-cobalt: #1A2FD4;
+  --accent-teal: #0D7A6B;
+  --accent-purple: #6B5FE8;
+  --accent-green: #2A7A1A;
+  --accent-orange: #F5820A;
   --nav-bg: #ffffff;
   --border: #e5e5e5;
 }
@@ -20,10 +23,10 @@
   --text: #0F0F0F;
   --card-bg: #EDE4CC;
   --muted: #666666;
-  --accent: #E8612A;
-  --accent-coral: #E8612A;
-  --accent-cobalt: #1B2A6B;
-  --accent-teal: #1B6B6B;
+  --accent: #E8392A;
+  --accent-coral: #E8392A;
+  --accent-cobalt: #1A2FD4;
+  --accent-teal: #0D7A6B;
   --nav-bg: #F5EDD6;
   --border: #D4C5A9;
 }
@@ -120,6 +123,31 @@ p {
   75%  { transform: translate(20px,30px) rotate(-4deg); }
   90%  { transform: translate(40px,-10px) rotate(4deg); }
   100% { transform: translate(0,0) rotate(0deg); }
+}
+
+.case-study-card:hover,
+.case-study-card:hover * {
+  cursor: none !important;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonial-card {
+  flex: 0 0 calc((100% - 48px) / 3.2);
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .testimonial-card {
+    flex: 0 0 calc((100% - 40px) / 2.2);
+  }
+}
+
+@media (max-width: 767px) {
+  .testimonial-card {
+    flex: 0 0 calc((100% - 32px) / 1.2);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

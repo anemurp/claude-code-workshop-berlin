@@ -14,6 +14,7 @@ export type CaseStudy = {
   description: string;
   thumbnail: string;
   tags: string[];
+  keyMetric?: string;
   overview: string;
   problem: string;
   process: string;
@@ -22,14 +23,15 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "tide-checkout",
-    title: "Tide Checkout Redesign",
-    company: "Tide",
+    slug: "reading-labs",
+    title: "Redesigning reading for 1.5M+ students across 22 levels",
+    company: "McGraw Hill",
     year: "2024",
     description:
-      "Reframed the onboarding flow around clarity over speed. Three rounds of usability testing, six prototypes, one launch — 34% improvement in completion.",
-    thumbnail: "",
-    tags: ["Product Design", "Fintech", "Usability Testing"],
+      "SRA Reading Labs had delivered reading for 60 years as a physical product built around teacher motivation. I redesigned it for independent student learning — 16 prototypes, 7 stakeholder groups, and a research-grounded motivation system that increased engagement by 68%.",
+    thumbnail: "/case-studies/reading-labs.png",
+    tags: ["EdTech", "Gamification", "User Research", "K–8"],
+    keyMetric: "1.5M+ students impacted",
     overview:
       "Tide's checkout flow had a 42% drop-off rate at the point of identity verification. Users were confused by the step count, unclear about what documents they'd need, and frustrated by a UI that felt like it was designed for compliance rather than people.",
     problem:
