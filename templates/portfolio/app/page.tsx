@@ -11,7 +11,7 @@ export default function Home() {
         <Hero />
 
         <section id="work" style={{ paddingTop: 32 }}>
-          <h2 style={{ marginBottom: 24 }}>
+          <h2 style={{ marginBottom: 24, fontSize: 28 }}>
             Selected Work
           </h2>
           <CaseStudyCards studies={caseStudies} />

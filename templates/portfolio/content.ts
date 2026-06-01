@@ -7,6 +7,8 @@
 export const hero = {
   name: "Anna Murphy",
   role: "Product Designer",
+  line2: "bridging people,",
+  line3: "research & AI",
   location: "Berlin, Germany",
   availability: "based in berlin",
   tagline: "Design that turns complexity into clarity",

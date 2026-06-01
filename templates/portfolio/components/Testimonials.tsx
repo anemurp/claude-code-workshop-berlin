@@ -69,6 +69,7 @@ export function Testimonials() {
         <h2
           style={{
             display: "inline-block",
+            fontSize: 28,
           }}
         >
           {testimonials.heading}
@@ -114,7 +115,7 @@ export function Testimonials() {
       {/* Carousel */}
       <div
         ref={scrollRef}
-        className="hide-scrollbar"
+        className="hide-scrollbar mx-auto"
         style={{
           display: "flex",
           gap: GAP,
@@ -122,11 +123,10 @@ export function Testimonials() {
           scrollSnapType: "x mandatory",
           padding: "24px 24px 32px",
           scrollbarWidth: "none",
-          width: "100%",
+          maxWidth: 548,
         }}
       >
         {testimonials.quotes.map((t, i) => {
-          const tilt = i % 2 === 0 ? -2 : 1.5;
           return (
             <motion.div
               key={i}
@@ -137,7 +137,6 @@ export function Testimonials() {
               viewport={{ once: true, margin: "-80px" }}
               whileHover={{
                 y: -6,
-                rotate: tilt,
                 transition: { duration: 0.25, ease: "easeOut" },
               }}
               className="testimonial-card"
@@ -145,9 +144,8 @@ export function Testimonials() {
                 minHeight: 300,
                 borderRadius: 18,
                 padding: 28,
-                scrollSnapAlign: "start",
+                scrollSnapAlign: "center",
                 backgroundColor: t.cardColor,
-                rotate: tilt,
               }}
             >
               {/* Avatar + name */}

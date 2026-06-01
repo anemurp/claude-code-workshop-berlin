@@ -154,27 +154,40 @@ export function Hero() {
           </motion.span>
 
           {/* Line 2: Product Designer */}
-          <motion.span {...line(0.15)} style={{ display: "block", ...TEXT, color: "#AAAAAA" }}>
-            Product Designer
+          <motion.span {...line(0.15)} style={{ display: "block", ...TEXT }}>
+            <span style={{
+              background: "linear-gradient(90deg, #B8A8E8, #C8A8F0, #F0A8C0)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+              {hero.role}
+            </span>
           </motion.span>
 
-          {/* Lines 3–4: Bridging people, / research & AI */}
-          <motion.span {...line(0.25)} style={{ display: "block", ...TEXT, color: "#AAAAAA" }}>
-            Bridging people,
+          {/* Lines 3–4 */}
+          <motion.span {...line(0.25)} style={{ display: "block", ...TEXT }}>
+            <span style={{
+              background: "linear-gradient(90deg, #C0A8F0, #E8A8D8, #F0B8C0)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+              {hero.line2}
+            </span>
             <br />
-            research &amp; AI
+            <span style={{
+              background: "linear-gradient(90deg, #C8A8F0, #F0A8C0, #F5B0B0)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
+              {hero.line3}
+            </span>
           </motion.span>
 
         </h1>
 
-        {/* Subtitle */}
-        <motion.p
-          {...line(0.35)}
-          className="mt-6 text-[18px] max-w-[480px] mx-auto leading-relaxed"
-          style={{ color: "var(--muted)" }}
-        >
-          {hero.headline}
-        </motion.p>
 
       </div>
     </section>
