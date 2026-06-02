@@ -125,6 +125,18 @@ p {
   100% { transform: translate(0,0) rotate(0deg); }
 }
 
+.senior-line {
+  font-size: clamp(44px, 6.5vw, 88px);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .senior-line {
+    white-space: normal !important;
+    font-size: clamp(36px, 9vw, 52px) !important;
+  }
+}
+
 .case-study-card:hover,
 .case-study-card:hover * {
   cursor: none !important;

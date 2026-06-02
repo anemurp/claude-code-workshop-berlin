@@ -67,10 +67,10 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-semibold text-xl shrink-0 transition-colors"
-            style={{ color: "#0F0F0F", fontWeight: 600 }}
-            onMouseEnter={e => (e.currentTarget.style.color = "#E8392A")}
-            onMouseLeave={e => (e.currentTarget.style.color = "#0F0F0F")}
+            className="font-semibold text-xl shrink-0"
+            style={{ color: "#0F0F0F", fontWeight: 600, transition: "opacity 0.2s ease" }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = "0.75")}
+            onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
           >
             {hero.name}
           </Link>

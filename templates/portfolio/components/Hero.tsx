@@ -184,14 +184,12 @@ export function Hero() {
 
   // Each text line has two layers: gray (fades out) and gradient (fades in).
   // The key only changes when cycling so hover-triggered palette swaps get a quick fade.
-  function gradientLine(id: string, text: string, gradient: string) {
+  function gradientLine(id: string, text: string, gradient: string, className?: string) {
     const cycleKey = gradientPhase === "cycling" ? `c${cycleIndex}` : "base";
     const fadeDuration = isFirstReveal.current ? 0.8 : 0.35;
 
     return (
-      // CSS grid stack: both children sit in cell 1/1, overlapping without absolute positioning.
-      // This guarantees text-align:center is inherited correctly by both layers.
-      <span style={{ display: "grid", width: "100%", textAlign: "center", overflow: "visible" }}>
+      <span className={className} style={{ display: "grid", width: "100%", textAlign: "center", overflow: "visible" }}>
 
         {/* Layer 1 — gray: visible on load, fades out as confetti paints the gradient */}
         <span
@@ -282,8 +280,8 @@ export function Hero() {
           </motion.span>
 
           {/* Line 2: Senior Product Designer */}
-          <motion.span {...line(0.5)} style={{ display: "block", width: "100%", textAlign: "center", overflow: "visible", ...TEXT, fontSize: "clamp(44px, 6.5vw, 88px)", whiteSpace: "nowrap" }}>
-            {gradientLine("role", hero.role, activeGradients[0])}
+          <motion.span {...line(0.5)} style={{ display: "block", width: "100%", textAlign: "center", overflow: "visible", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.05, fontFamily: '"Inter Display", Inter, sans-serif' }}>
+            {gradientLine("role", hero.role, activeGradients[0], "senior-line")}
           </motion.span>
 
           {/* Lines 3–4: bridging people, + research & AI */}
