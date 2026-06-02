@@ -42,11 +42,12 @@ export function Navbar() {
     color: "#0F0F0F",
     display: "flex",
     alignItems: "center",
-    background: "none",
+    background: "transparent",
     border: "none",
     cursor: "pointer",
-    padding: 0,
-    transition: "color 0.2s ease",
+    padding: "6px 8px",
+    borderRadius: 999,
+    transition: "background 0.2s ease",
   } as React.CSSProperties;
 
   return (
@@ -76,18 +77,23 @@ export function Navbar() {
 
           {/* Desktop */}
           <div className="hidden lg:flex items-center gap-5 text-sm">
-            <ul className="flex items-center gap-5">
+            <ul className="flex items-center gap-1">
               {navLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="transition-colors"
                     style={{
-                      color: pathname === l.href ? "#E8392A" : "#0F0F0F",
+                      display: "inline-block",
+                      padding: "6px 14px",
+                      borderRadius: 999,
+                      background: pathname === l.href ? "rgba(180, 170, 220, 0.35)" : "transparent",
+                      color: "#0F0F0F",
                       fontWeight: pathname === l.href ? 500 : 400,
+                      textDecoration: "none",
+                      transition: "background 0.2s ease",
                     }}
-                    onMouseEnter={e => { if (pathname !== l.href) e.currentTarget.style.color = "#E8392A"; }}
-                    onMouseLeave={e => { if (pathname !== l.href) e.currentTarget.style.color = "#0F0F0F"; }}
+                    onMouseEnter={e => { if (pathname !== l.href) e.currentTarget.style.background = "rgba(180, 170, 220, 0.25)"; }}
+                    onMouseLeave={e => { if (pathname !== l.href) e.currentTarget.style.background = "transparent"; }}
                   >
                     {l.label}
                   </Link>
@@ -101,8 +107,8 @@ export function Navbar() {
               aria-label="Copy email address"
               className="relative"
               style={iconStyle}
-              onMouseEnter={e => (e.currentTarget.style.color = "#E8392A")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#0F0F0F")}
+              onMouseEnter={e => (e.currentTarget.style.background = "rgba(180, 170, 220, 0.25)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
             >
               <Mail size={20} />
               {copied && (
@@ -122,8 +128,8 @@ export function Navbar() {
               rel="noopener noreferrer"
               aria-label="LinkedIn"
               style={iconStyle}
-              onMouseEnter={e => (e.currentTarget.style.color = "#E8392A")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#0F0F0F")}
+              onMouseEnter={e => (e.currentTarget.style.background = "rgba(180, 170, 220, 0.25)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>

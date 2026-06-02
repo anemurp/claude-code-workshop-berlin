@@ -1,62 +1,62 @@
-// ────────────────────────────────────────────────────────────────
-// CASE STUDY DATA
-// Add your case studies here. Each one becomes a page at
-// /case-studies/[slug]. Set thumbnail to a path inside /public,
-// e.g. "/case-studies/tide-thumb.jpg", or leave it "" for a
-// placeholder until you have an image.
-// ────────────────────────────────────────────────────────────────
-
 export type CaseStudy = {
   slug: string;
   title: string;
   company: string;
-  year: string;
+  date: string;
   description: string;
-  thumbnail: string;
+  mockupImage: string;
+  cardBackground: string;
   tags: string[];
-  keyMetric?: string;
-  overview: string;
-  problem: string;
-  process: string;
-  outcome: string;
+  metrics: Array<{ value: string; label: string }>;
 };
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "reading-labs",
+    slug: "sra-reading-labs",
     title: "Redesigning reading for 1.5M+ students across 22 levels",
     company: "McGraw Hill",
-    year: "2024",
+    date: "2024",
+    cardBackground: "#D4256B",
+    mockupImage: "/case-studies/Reading%20Labs%20Thumbnail%20%281%29.png",
+    tags: ["EdTech", "Gamification", "User Research", "K-8"],
     description:
       "SRA Reading Labs had delivered reading for 60 years as a physical product built around teacher motivation. I redesigned it for independent student learning — 16 prototypes, 7 stakeholder groups, and a research-grounded motivation system that increased engagement by 68%.",
-    thumbnail: "/case-studies/reading-labs.png",
-    tags: ["EdTech", "Gamification", "User Research", "K–8"],
-    keyMetric: "1.5M+ students impacted",
-    overview:
-      "Tide's checkout flow had a 42% drop-off rate at the point of identity verification. Users were confused by the step count, unclear about what documents they'd need, and frustrated by a UI that felt like it was designed for compliance rather than people.",
-    problem:
-      "The core issue wasn't technical — it was that the flow treated verification as a legal hurdle rather than a trust-building moment. We needed to redesign it around clarity: tell people what's coming, why it matters, and what to expect next.",
-    process:
-      "I ran two rounds of moderated usability tests with 12 participants each, mapping exactly where confidence dropped. From there I built six lo-fi prototypes testing different step-disclosure patterns. The winning pattern showed a persistent 'You're on step 2 of 4' indicator with a one-line preview of the next step.",
-    outcome:
-      "After launch, signup completion improved 34% in the first quarter. Support tickets related to verification confusion dropped 61%. The pattern was later adopted by three other flows in the app.",
+    metrics: [
+      { value: "1.5M+", label: "Students impacted" },
+      { value: "68%",   label: "Engagement increase" },
+      { value: "16",    label: "Prototypes tested" },
+    ],
   },
   {
-    slug: "gitlab-inline-review",
-    title: "GitLab Inline Code Review",
-    company: "GitLab",
-    year: "2022",
+    slug: "new-lit",
+    title: "Building a reading platform for the next generation of learners",
+    company: "New Lit",
+    date: "2023",
+    cardBackground: "#1A2FD4",
+    mockupImage: "/case-studies/New%20Lit%20Thumbnail.png",
+    tags: ["EdTech", "Product Design", "User Research"],
     description:
-      "Designed the inline review pattern now used by 30+ million developers. Started as a hack-week prototype, became a flagship feature.",
-    thumbnail: "/case-studies/New-lit.png",
-    tags: ["Product Design", "Developer Tools", "Interaction Design"],
-    overview:
-      "GitLab's merge request review flow required users to leave context to add comments — a constant interruption to the reading flow. The 30+ million developers using GitLab each week were losing time to a UI pattern that made review feel harder than it needed to be.",
-    problem:
-      "The existing comment system anchored to line numbers but didn't let reviewers stay in their reading flow. Every comment required a scroll jump, a form, and a submit — three friction points where one would do.",
-    process:
-      "I prototyped an inline hover-and-comment pattern during hack week and tested it with six GitLab engineers. Feedback surfaced two problems: accidental triggers on hover, and no clear affordance that comments were possible. I iterated to a click-to-expand model with a persistent gutter icon, then ran a second round of testing before handing off to engineering.",
-    outcome:
-      "Shipped in GitLab 15.1. Became the primary review interface for the platform. Internal metrics showed a 22% increase in review comment rates on MRs, suggesting reviewers were engaging more deeply with code.",
+      "Placeholder — update with real New Lit case study description.",
+    metrics: [
+      { value: "TBD", label: "Metric 1" },
+      { value: "TBD", label: "Metric 2" },
+      { value: "TBD", label: "Metric 3" },
+    ],
+  },
+  {
+    slug: "teacher-reports",
+    title: "Redesigning teacher reports for clarity and actionability",
+    company: "McGraw Hill",
+    date: "2023",
+    cardBackground: "#16A34A",
+    mockupImage: "",
+    tags: ["EdTech", "Data Visualization", "User Research"],
+    description:
+      "Placeholder — update with real Teacher Reports case study description.",
+    metrics: [
+      { value: "TBD", label: "Metric 1" },
+      { value: "TBD", label: "Metric 2" },
+      { value: "TBD", label: "Metric 3" },
+    ],
   },
 ];

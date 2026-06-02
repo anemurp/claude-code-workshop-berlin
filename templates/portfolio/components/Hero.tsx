@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { hero } from "../content";
 
 const ease = [0.4, 0, 0.2, 1] as [number, number, number, number];
@@ -266,11 +265,10 @@ export function Hero() {
                   AM
                 </span>
               ) : (
-                <Image
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   src="/images/photo.png"
                   alt="Anna Murphy"
-                  width={200}
-                  height={200}
                   onError={() => setPhotoError(true)}
                   style={{
                     ...PHOTO_SIZE,

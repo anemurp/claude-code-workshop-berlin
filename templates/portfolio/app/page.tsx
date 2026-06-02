@@ -12,7 +12,7 @@ export default function Home() {
       <SkillsTicker />
 
       <main className="mx-auto max-w-3xl px-6">
-        <section id="work" style={{ paddingTop: 32 }}>
+        <section id="work" style={{ paddingTop: 72 }}>
           <h2 style={{ marginBottom: 24, fontSize: 20, fontWeight: 600 }}>
             Selected Work
           </h2>
