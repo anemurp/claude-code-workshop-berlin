@@ -6,7 +6,6 @@ import Image from "next/image";
 import { hero } from "../content";
 
 const ease = [0.4, 0, 0.2, 1] as [number, number, number, number];
-const spring = [0.34, 1.56, 0.64, 1] as [number, number, number, number];
 
 function line(delay: number) {
   return {
@@ -65,18 +64,20 @@ const GRADIENT_CYCLES: string[][] = [
   ],
 ];
 
+// Pastel palette matching the unlock gradient
+const CONFETTI_COLORS = ["#B8A8E8", "#C8A8F0", "#F0A8C0", "#E8A8D8", "#D4A8F8", "#F5B0B0"];
+
 function spawnConfettiAt(centerX: number, centerY: number) {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const count = Math.floor(Math.random() * 5) + 12;
-  const colors = ["#E8392A", "#1A2FD4", "#0D7A6B", "#6B5FE8", "#F5820A", "#2A7A1A"];
+  const count = Math.floor(Math.random() * 5) + 20; // 20–24
   const shapes = ["circle", "rect", "square"];
 
   for (let i = 0; i < count; i++) {
     const particle = document.createElement("div");
-    const color = colors[Math.floor(Math.random() * colors.length)];
+    const color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
     const shape = shapes[Math.floor(Math.random() * shapes.length)];
-    const size = Math.random() * 4 + 5;
+    const size = Math.random() * 6 + 4; // 4–10px
 
     particle.style.cssText = `
       position: fixed;
@@ -92,12 +93,21 @@ function spawnConfettiAt(centerX: number, centerY: number) {
     `;
     document.body.appendChild(particle);
 
-    const angle = Math.random() * Math.PI * 2;
-    const distance = Math.random() * 80 + 60;
-    const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance;
+    // 40% travel downward (over the text), 60% go in all directions
+    // 0–180° produces positive CSS-y (downward on screen)
+    const isDownward = Math.random() < 0.4;
+    const angleDeg = isDownward
+      ? Math.random() * 180          // 0–180° → falls down
+      : Math.random() * 360;         // full circle
+    const angleRad = (angleDeg * Math.PI) / 180;
+    const distance = Math.random() * 120 + 80; // 80–200px
+
+    const x = Math.cos(angleRad) * distance;
+    let y = Math.sin(angleRad) * distance;
+    if (isDownward) y += Math.random() * 20 + 20; // gravity nudge 20–40px
+
     const rot = Math.random() * 360 - 180;
-    const duration = Math.random() * 800 + 1400;
+    const duration = Math.random() * 600 + 800; // 800–1400ms
 
     const anim = particle.animate(
       [
@@ -119,22 +129,41 @@ function spawnConfetti(e: React.MouseEvent<HTMLSpanElement>) {
 export function Hero() {
   const [photoError, setPhotoError] = useState(false);
   const [gradientPhase, setGradientPhase] = useState<"initial" | "unlocked" | "cycling">("initial");
+  const [isRevealed, setIsRevealed] = useState(false);
   const [cycleIndex, setCycleIndex] = useState(0);
   const photoRef = useRef<HTMLSpanElement>(null);
   const cycleRef = useRef(0);
+  // Tracks whether the NEXT gradient fade-in is the first reveal (0.8s) or a hover cycle (0.35s)
+  const isFirstReveal = useRef(true);
 
   useEffect(() => {
-    let unlockTimer: ReturnType<typeof setTimeout>;
-    const timer = setTimeout(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsRevealed(true);
+      setGradientPhase("unlocked");
+      isFirstReveal.current = false;
+      return;
+    }
+
+    const confettiTimer = setTimeout(() => {
       if (photoRef.current) {
         const rect = photoRef.current.getBoundingClientRect();
         spawnConfettiAt(rect.left + rect.width / 2, rect.top + rect.height / 2);
       }
-      // Unlock gradients shortly after confetti fires
-      unlockTimer = setTimeout(() => setGradientPhase("unlocked"), 600);
-    }, 1500);
+    }, 800);
+
+    // Text starts transitioning while confetti is mid-air
+    const revealTimer = setTimeout(() => setIsRevealed(true), 1000);
+
+    // Mark first reveal done once the 0.8s transition has finished
+    const revealDoneTimer = setTimeout(() => { isFirstReveal.current = false; }, 1800);
+
+    // Phase unlocks (enables hover interaction) once confetti has settled
+    const unlockTimer = setTimeout(() => setGradientPhase("unlocked"), 1800);
+
     return () => {
-      clearTimeout(timer);
+      clearTimeout(confettiTimer);
+      clearTimeout(revealTimer);
+      clearTimeout(revealDoneTimer);
       clearTimeout(unlockTimer);
     };
   }, []);
@@ -152,30 +181,54 @@ export function Hero() {
     }
   }
 
-  const isInitial = gradientPhase === "initial";
   const activeGradients = gradientPhase === "cycling" ? GRADIENT_CYCLES[cycleIndex] : UNLOCKED_GRADIENTS;
 
-  // Re-mounts with a fade whenever phase or cycleIndex changes.
-  // display:block fills the full line width so background-clip:text never clips edge glyphs.
+  // Each text line has two layers: gray (fades out) and gradient (fades in).
+  // The key only changes when cycling so hover-triggered palette swaps get a quick fade.
   function gradientLine(id: string, text: string, gradient: string) {
-    const textStyle: React.CSSProperties = isInitial
-      ? { color: "#AAAAAA", WebkitTextFillColor: "#AAAAAA" }
-      : {
-          background: gradient,
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text" as const,
-        };
+    const cycleKey = gradientPhase === "cycling" ? `c${cycleIndex}` : "base";
+    const fadeDuration = isFirstReveal.current ? 0.8 : 0.35;
+
     return (
-      <motion.span
-        key={`${id}-${gradientPhase}-${cycleIndex}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.35 }}
-        style={{ display: "block", overflow: "visible", paddingBottom: "0.1em", ...textStyle }}
-      >
-        {text}
-      </motion.span>
+      // CSS grid stack: both children sit in cell 1/1, overlapping without absolute positioning.
+      // This guarantees text-align:center is inherited correctly by both layers.
+      <span style={{ display: "grid", width: "100%", textAlign: "center", overflow: "visible" }}>
+
+        {/* Layer 1 — gray: visible on load, fades out as confetti paints the gradient */}
+        <span
+          style={{
+            gridArea: "1/1",
+            textAlign: "center",
+            color: "#CCCCCC",
+            WebkitTextFillColor: "#CCCCCC",
+            opacity: isRevealed ? 0 : 1,
+            transition: "opacity 0.8s ease-out",
+            pointerEvents: "none",
+          }}
+        >
+          {text}
+        </span>
+
+        {/* Layer 2 — gradient: invisible on load (holds grid dimensions), fades in during confetti flight */}
+        <motion.span
+          key={`${id}-${cycleKey}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isRevealed ? 1 : 0 }}
+          transition={{ duration: fadeDuration, ease: "easeIn" }}
+          style={{
+            gridArea: "1/1",
+            textAlign: "center",
+            background: gradient,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text" as const,
+            overflow: "visible",
+          }}
+        >
+          {text}
+        </motion.span>
+
+      </span>
     );
   }
 
@@ -187,10 +240,10 @@ export function Hero() {
       <div className="text-center px-6 relative z-10">
 
         {/* Headline */}
-        <h1 style={{ margin: "0 auto", maxWidth: "100%", width: "100%", overflow: "visible", ...TEXT }}>
+        <h1 style={{ margin: "0 auto", maxWidth: 960, width: "100%", textAlign: "center", overflow: "visible", ...TEXT }}>
 
           {/* Line 1: I'm [photo] Anna */}
-          <motion.span {...line(0)} style={{ display: "block", ...TEXT, color: "var(--text)" }}>
+          <motion.span {...line(0)} style={{ display: "block", width: "100%", textAlign: "center", ...TEXT, color: "var(--text)" }}>
             I&apos;m
             <motion.span
               initial={{ scale: 1, opacity: 1 }}
@@ -231,12 +284,12 @@ export function Hero() {
           </motion.span>
 
           {/* Line 2: Senior Product Designer */}
-          <motion.span {...line(0.5)} style={{ display: "block", ...TEXT, whiteSpace: "nowrap" }}>
+          <motion.span {...line(0.5)} style={{ display: "block", width: "100%", textAlign: "center", overflow: "visible", ...TEXT, fontSize: "clamp(44px, 6.5vw, 88px)", whiteSpace: "nowrap" }}>
             {gradientLine("role", hero.role, activeGradients[0])}
           </motion.span>
 
           {/* Lines 3–4: bridging people, + research & AI */}
-          <motion.span {...line(0.8)} style={{ display: "block", ...TEXT }}>
+          <motion.span {...line(0.8)} style={{ display: "block", width: "100%", textAlign: "center", overflow: "visible", ...TEXT, fontSize: "clamp(44px, 6.5vw, 88px)" }}>
             {gradientLine("line2", hero.line2, activeGradients[1])}
             {gradientLine("line3", hero.line3, activeGradients[2])}
           </motion.span>

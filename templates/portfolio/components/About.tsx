@@ -1,3 +1,4 @@
+import { Download } from "lucide-react";
 import { about } from "../content";
 
 export function About() {
@@ -8,6 +9,24 @@ export function About() {
         {about.paragraphs.map((p, i) => (
           <p key={i}>{p}</p>
         ))}
+      </div>
+      <div className="mt-8">
+        <a
+          href="/resume.pdf"
+          download
+          className="inline-flex items-center gap-2 text-sm font-medium transition-all duration-200 hover:bg-[#0F0F0F] hover:text-white"
+          style={{
+            padding: "10px 20px",
+            borderRadius: 999,
+            border: "1px solid #0F0F0F",
+            color: "#0F0F0F",
+            background: "transparent",
+            textDecoration: "none",
+          }}
+        >
+          <Download size={16} />
+          Resume
+        </a>
       </div>
     </section>
   );
