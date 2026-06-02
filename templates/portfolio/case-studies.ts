@@ -32,7 +32,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Building a reading platform for the next generation of learners",
     company: "New Lit",
     date: "2023",
-    cardBackground: "#1A2FD4",
+    cardBackground: "#4B6BF5",
     mockupImage: "/case-studies/New%20Lit%20Thumbnail.png",
     tags: ["EdTech", "Product Design", "User Research"],
     description:

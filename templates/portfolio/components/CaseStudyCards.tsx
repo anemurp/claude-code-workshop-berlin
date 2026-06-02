@@ -25,7 +25,7 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
         const tilt = i % 2 === 0 ? 1.5 : -1.5;
         const isHovered = hoveredCard === cs.slug;
         return (
-        <li key={cs.slug}>
+        <li key={cs.slug} style={{ background: "transparent" }}>
           {/*
             Outer wrapper: py-10 on desktop gives 40px above/below for the
             image to overflow into. overflow-hidden on mobile keeps it tidy.
@@ -33,8 +33,8 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
           <div
             className="relative overflow-hidden md:overflow-visible py-0 md:py-10"
             style={{
+              background: "transparent",
               transform: isHovered ? `translateY(-8px) rotate(${tilt}deg)` : "translateY(0) rotate(0deg)",
-              boxShadow: isHovered ? "0 24px 64px rgba(0,0,0,0.2)" : "0 8px 32px rgba(0,0,0,0.1)",
               transition: TRANSITION,
               transformOrigin: "center bottom",
               cursor: "pointer",
@@ -45,12 +45,17 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
 
             {/*
               Background layer — strictly clipped to the card shape.
-              On mobile it covers the full height (top-0/bottom-0).
-              On desktop it sits inside the 40px padding (top-10/bottom-10).
+              Shadow lives here so it's cast from the coloured card, not
+              the transparent outer wrapper.
             */}
             <div
               className="absolute inset-x-0 top-0 bottom-0 md:top-10 md:bottom-10 rounded-2xl"
-              style={{ backgroundColor: cs.cardBackground, zIndex: 0 }}
+              style={{
+                backgroundColor: cs.cardBackground,
+                boxShadow: isHovered ? "0 24px 64px rgba(0,0,0,0.2)" : "0 8px 32px rgba(0,0,0,0.1)",
+                transition: "box-shadow 0.35s ease",
+                zIndex: 0,
+              }}
             />
 
             {/* Content layer — sits above background, free to overflow */}
