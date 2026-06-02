@@ -220,6 +220,8 @@ export function Hero() {
             WebkitTextFillColor: "transparent",
             backgroundClip: "text" as const,
             overflow: "visible",
+            paddingBottom: 10,
+            marginBottom: -10,
           }}
         >
           {text}
