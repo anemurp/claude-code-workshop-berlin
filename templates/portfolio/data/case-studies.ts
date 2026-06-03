@@ -127,7 +127,13 @@ export const caseStudies: CaseStudy[] = [
     fullWidthImage: "",
     framingHeading: "Placeholder heading",
     framingBody: "Placeholder framing body — update with real content.",
-    sections: [],
+    sections: [
+      { id: "the-problem",         label: "The Problem",                           heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "right" },
+      { id: "the-research",        label: "The Research",                          heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "left"  },
+      { id: "the-solution",        label: "The Solution",                          heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "dark"  },
+      { id: "what-didnt-make-it",  label: "What didn't make it and why",           heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "full"  },
+      { id: "three-things",        label: "Three things I'd carry into the next project", heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "full"  },
+    ],
     nextProject: {
       slug: "teacher-reports",
       title: "Giving teachers a window into every moment of learning",
@@ -152,7 +158,13 @@ export const caseStudies: CaseStudy[] = [
     fullWidthImage: "",
     framingHeading: "Placeholder heading",
     framingBody: "Placeholder framing body — update with real content.",
-    sections: [],
+    sections: [
+      { id: "the-problem",         label: "The Problem",                           heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "right" },
+      { id: "the-research",        label: "The Research",                          heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "left"  },
+      { id: "the-solution",        label: "The Solution",                          heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "dark"  },
+      { id: "what-didnt-make-it",  label: "What didn't make it and why",           heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "full"  },
+      { id: "three-things",        label: "Three things I'd carry into the next project", heading: "Placeholder heading", body: "Placeholder body — update with real content.", layout: "full"  },
+    ],
     nextProject: {
       slug: "sra-reading-labs",
       title: "From physical to digital: gamifying independent learning",

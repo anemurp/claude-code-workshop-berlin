@@ -49,7 +49,7 @@ export const caseStudies: CaseStudy[] = [
     company: "McGraw Hill",
     date: "2023",
     cardBackground: "#16A34A",
-    mockupImage: "",
+    mockupImage: "/case-studies/TeacherReports.png",
     tags: ["EdTech", "Data Visualization", "User Research"],
     description:
       "Placeholder — update with real Teacher Reports case study description.",

@@ -92,23 +92,39 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
                         Desktop: absolute div extends 40px above and below
                         the grid row, popping out of the card boundary.
                       */}
-                      <div
-                        className="hidden md:block absolute"
-                        style={{ top: -110, bottom: -110, left: -30, right: -80 }}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={cs.mockupImage}
-                          alt={cs.title}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "contain",
-                            objectPosition: "center",
-                            filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.3))",
-                          }}
-                        />
-                      </div>
+                      {cs.slug === "teacher-reports" ? (
+                        <div
+                          className="hidden md:flex absolute items-center justify-center"
+                          style={{ top: -110, bottom: -110, left: 0, right: 0, paddingLeft: 20, paddingRight: 20 }}
+                        >
+                          <div style={{ width: "100%", height: "100%", borderRadius: 80, overflow: "hidden" }}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={cs.mockupImage}
+                              alt={cs.title}
+                              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <div
+                          className="hidden md:block absolute"
+                          style={{ top: -110, bottom: -110, left: -30, right: -80 }}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={cs.mockupImage}
+                            alt={cs.title}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "contain",
+                              objectPosition: "center",
+                              filter: "drop-shadow(0 24px 48px rgba(0,0,0,0.3))",
+                            }}
+                          />
+                        </div>
+                      )}
 
                       {/* Mobile: normal flow, contained within card */}
                       <div className="md:hidden" style={{ padding: "0 24px 32px" }}>
