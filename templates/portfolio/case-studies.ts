@@ -13,8 +13,8 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "sra-reading-labs",
-    title: "Redesigning reading for 1.5M+ students across 22 levels",
-    company: "McGraw Hill",
+    title: "From physical to digital: gamifying independent learning",
+    company: "SRA Reading Labs",
     date: "2024",
     cardBackground: "#D4256B",
     mockupImage: "/case-studies/Reading%20Labs%20Thumbnail%20%281%29.png",
@@ -29,23 +29,23 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "new-lit",
-    title: "Building a reading platform for the next generation of learners",
-    company: "New Lit",
+    title: "Annotate, listen, respond, unlock: designing reading that moves students forward",
+    company: "Summit! & Soar!",
     date: "2023",
     cardBackground: "#4B6BF5",
     mockupImage: "/case-studies/New%20Lit%20Thumbnail.png",
     tags: ["EdTech", "Product Design", "User Research"],
     description:
-      "Placeholder — update with real New Lit case study description.",
+      "Placeholder — update with real Summit! & Soar! case study description.",
     metrics: [
-      { value: "TBD", label: "Metric 1" },
-      { value: "TBD", label: "Metric 2" },
-      { value: "TBD", label: "Metric 3" },
+      { value: "100%", label: "Validation in user testing" },
+      { value: "7", label: "Stakeholder groups aligned" },
+      { value: "10", label: "Interactive layered features" },
     ],
   },
   {
     slug: "teacher-reports",
-    title: "Redesigning teacher reports for clarity and actionability",
+    title: "Giving teachers a window into every moment of learning",
     company: "McGraw Hill",
     date: "2023",
     cardBackground: "#16A34A",
@@ -54,9 +54,9 @@ export const caseStudies: CaseStudy[] = [
     description:
       "Placeholder — update with real Teacher Reports case study description.",
     metrics: [
-      { value: "TBD", label: "Metric 1" },
-      { value: "TBD", label: "Metric 2" },
-      { value: "TBD", label: "Metric 3" },
+      { value: "0→1", label: "Discovery to dev handoff in one month" },
+      { value: "100%",  label: "WCAG AA accessible" },
+      { value: "6",     label: "Student statuses designed" },
     ],
   },
 ];

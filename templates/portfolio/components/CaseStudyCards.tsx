@@ -65,9 +65,9 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
                 {/* Left: text */}
                 <div style={{ padding: "40px 24px 40px 48px" }}>
                   <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 12, fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 12 }}>
-                    {cs.company} · {cs.date}
+                    {cs.company}
                   </p>
-                  <h3 style={{ color: "white", fontSize: "clamp(20px, 2.2vw, 30px)", fontWeight: 700, lineHeight: 1.2, letterSpacing: "-0.02em", marginBottom: 28 }}>
+                  <h3 style={{ color: "white", fontSize: "clamp(20px, 2.2vw, 30px)", fontWeight: 700, lineHeight: 1.2, letterSpacing: "-0.02em", marginBottom: 88 }}>
                     {cs.title}
                   </h3>
                   <div className="flex gap-8">
@@ -94,7 +94,7 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
                       */}
                       <div
                         className="hidden md:block absolute"
-                        style={{ top: -80, bottom: -80, left: -20, right: -60 }}
+                        style={{ top: -110, bottom: -110, left: -30, right: -80 }}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img

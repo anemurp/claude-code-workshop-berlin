@@ -49,7 +49,7 @@ export function SkillsTicker() {
         style={{
           backgroundColor: "#F0EEF8",
           padding: "20px 0",
-          marginTop: -20,
+          marginTop: 20,
           width: "100%",
           overflow: "hidden",
           position: "relative",
@@ -75,7 +75,7 @@ export function SkillsTicker() {
                 alignItems: "center",
                 gap: 8,
                 padding: "0 28px",
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: 500,
                 letterSpacing: "0.03em",
                 whiteSpace: "nowrap",
@@ -86,7 +86,7 @@ export function SkillsTicker() {
               }}
             >
               <skill.Icon
-                size={16}
+                size={18}
                 strokeWidth={2}
                 style={{ stroke: "#888888", fill: "none", flexShrink: 0 }}
               />

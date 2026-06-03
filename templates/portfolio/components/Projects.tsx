@@ -11,7 +11,6 @@ export function Projects() {
               <h3 className="text-xl font-medium group-hover:text-accent transition">
                 {p.title}
               </h3>
-              <span className="text-sm text-ink/50">{p.year}</span>
             </div>
             <p className="mt-3 text-ink/75 leading-relaxed max-w-2xl">
               {p.summary}

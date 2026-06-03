@@ -36,7 +36,8 @@ export function FloatingVideo() {
       const footerTop = footer.getBoundingClientRect().top;
       const viewportHeight = window.innerHeight;
       if (footerTop < viewportHeight) {
-        setBottomOffset(viewportHeight - footerTop + 24);
+        // Align the button's bottom edge exactly with the footer's top edge
+        setBottomOffset(viewportHeight - footerTop);
       } else {
         setBottomOffset(24);
       }

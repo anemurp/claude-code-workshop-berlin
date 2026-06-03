@@ -31,6 +31,7 @@ export type CaseStudy = {
   timeline: string;
   team: string;
   heroImage: string;
+  heroBackground: string;
   metrics: Array<{ value: string; label: string }>;
   fullWidthImage?: string;
   framingHeading: string;
@@ -42,7 +43,7 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "sra-reading-labs",
-    title: "Redesigning reading for 1.5M+ students across 22 levels",
+    title: "From physical to digital: gamifying independent learning",
     subtitle:
       "SRA Reading Labs had delivered reading for 60 years as a physical product. I redesigned it for independent student learning — a research-grounded motivation system that increased engagement by 68%.",
     company: "McGraw Hill",
@@ -50,7 +51,8 @@ export const caseStudies: CaseStudy[] = [
     role: "Senior UX Designer",
     timeline: "14 months",
     team: "1 designer · 4 engineers · 2 PMs · 7 stakeholder groups",
-    heroImage: "/case-studies/reading-labs.png",
+    heroImage: "/case-studies/Reading%20Labs%20Thumbnail%20%281%29.png",
+    heroBackground: "#D4256B",
     metrics: [
       { value: "1.5M+", label: "Students impacted across 22 levels" },
       { value: "68%", label: "Increase in student engagement" },
@@ -103,19 +105,20 @@ export const caseStudies: CaseStudy[] = [
     ],
     nextProject: {
       slug: "new-lit",
-      title: "Building a reading platform for the next generation of learners",
+      title: "Annotate, listen, respond, unlock: designing reading that moves students forward",
     },
   },
   {
     slug: "new-lit",
-    title: "Building a reading platform for the next generation of learners",
+    title: "Annotate, listen, respond, unlock: designing reading that moves students forward",
     subtitle: "Placeholder — update with real New Lit case study description.",
     company: "New Lit",
     year: "2023",
     role: "Senior UX Designer",
     timeline: "TBD",
     team: "TBD",
-    heroImage: "/case-studies/New-lit.png",
+    heroImage: "/case-studies/New%20Lit%20Thumbnail.png",
+    heroBackground: "#4B6BF5",
     metrics: [
       { value: "TBD", label: "Metric 1" },
       { value: "TBD", label: "Metric 2" },
@@ -127,12 +130,12 @@ export const caseStudies: CaseStudy[] = [
     sections: [],
     nextProject: {
       slug: "teacher-reports",
-      title: "Redesigning teacher reports for clarity and actionability",
+      title: "Giving teachers a window into every moment of learning",
     },
   },
   {
     slug: "teacher-reports",
-    title: "Redesigning teacher reports for clarity and actionability",
+    title: "Giving teachers a window into every moment of learning",
     subtitle: "Placeholder — update with real Teacher Reports case study description.",
     company: "McGraw Hill",
     year: "2023",
@@ -140,10 +143,11 @@ export const caseStudies: CaseStudy[] = [
     timeline: "TBD",
     team: "TBD",
     heroImage: "",
+    heroBackground: "#16A34A",
     metrics: [
-      { value: "TBD", label: "Metric 1" },
-      { value: "TBD", label: "Metric 2" },
-      { value: "TBD", label: "Metric 3" },
+      { value: "0 → 1", label: "Discovery to dev handoff in one month" },
+      { value: "100%", label: "WCAG AA accessible" },
+      { value: "6", label: "Student statuses designed" },
     ],
     fullWidthImage: "",
     framingHeading: "Placeholder heading",
@@ -151,7 +155,7 @@ export const caseStudies: CaseStudy[] = [
     sections: [],
     nextProject: {
       slug: "sra-reading-labs",
-      title: "Redesigning reading for 1.5M+ students across 22 levels",
+      title: "From physical to digital: gamifying independent learning",
     },
   },
 ];

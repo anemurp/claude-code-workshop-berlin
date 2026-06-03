@@ -328,7 +328,7 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
         animate="visible"
       >
         {/* Large hero image */}
-        <motion.div variants={item} className="mb-10">
+        <motion.div variants={item} className="mb-10 rounded-2xl overflow-hidden" style={{ backgroundColor: cs.heroBackground }}>
           <BrowserMockup image={cs.heroImage} label={cs.title} />
         </motion.div>
 

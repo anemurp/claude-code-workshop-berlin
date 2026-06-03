@@ -14,7 +14,7 @@ export const hero = {
   tagline: "Design that turns complexity into clarity",
   headline:
     "Former teacher. Current designer. I understand how people learn, not just how they click.",
-  ctaPrimary: { label: "LinkedIn", href: "https://linkedin.com/in/yourname" },
+  ctaPrimary: { label: "LinkedIn", href: "https://www.linkedin.com/in/aemurph/" },
   ctaSecondary: { label: "Get in touch", href: "#contact" },
 };
 
@@ -171,7 +171,7 @@ export const contact = {
     "Open to product design roles, collaborations, and the occasional coffee. Berlin or remote.",
   email: "anemurp@gmail.com",
   socials: [
-    { label: "LinkedIn", href: "https://linkedin.com/in/yourname" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/aemurph/" },
     { label: "Twitter / X", href: "https://twitter.com/yourname" },
     { label: "Read.cv", href: "https://read.cv/yourname" },
   ],
