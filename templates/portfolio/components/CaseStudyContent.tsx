@@ -100,7 +100,7 @@ function DesktopTOC({
             onClick={() => onNavigate(item.id)}
             className={`w-full text-left px-4 py-3 rounded-2xl text-[15px] font-medium transition-all duration-200 ${
               active
-                ? "bg-cobalt text-white font-semibold shadow-sm"
+                ? "bg-[#6B5CE7] text-white font-semibold shadow-sm"
                 : "text-navy/45 hover:text-cobalt hover:bg-cobalt/5"
             }`}
           >
@@ -154,7 +154,7 @@ function MobileTOC({
                 }}
                 className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? "bg-cobalt text-white font-semibold"
+                    ? "bg-[#6B5CE7] text-white font-semibold"
                     : "text-navy/55 hover:text-cobalt hover:bg-cobalt/5"
                 }`}
               >
@@ -182,7 +182,7 @@ function SectionBlock({ section }: { section: Section }) {
         whileInView="visible"
         viewport={VIEWPORT}
       >
-        <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
+        <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-[#6B5CE7] mb-4">
           {section.label}
         </motion.p>
         <motion.h2 variants={item} className="text-3xl md:text-4xl font-bold leading-tight max-w-2xl mb-5">
@@ -211,7 +211,7 @@ function SectionBlock({ section }: { section: Section }) {
         whileInView="visible"
         viewport={VIEWPORT}
       >
-        <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-cobalt mb-4">
+        <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-[#6B5CE7] mb-4">
           {section.label}
         </motion.p>
         <motion.h2 variants={item} className="text-3xl md:text-4xl font-bold text-navy leading-tight max-w-2xl mb-5">
@@ -249,7 +249,7 @@ function SectionBlock({ section }: { section: Section }) {
               <PhoneMockup image={section.image} label={section.label} />
             </motion.div>
             <div>
-              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-cobalt mb-4">
+              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-[#6B5CE7] mb-4">
                 {section.label}
               </motion.p>
               <motion.h2 variants={item} className="text-2xl md:text-3xl font-bold text-navy leading-tight mb-4">
@@ -263,7 +263,7 @@ function SectionBlock({ section }: { section: Section }) {
         ) : (
           <>
             <div>
-              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-cobalt mb-4">
+              <motion.p variants={item} className="text-xs font-bold uppercase tracking-[0.15em] text-[#6B5CE7] mb-4">
                 {section.label}
               </motion.p>
               <motion.h2 variants={item} className="text-2xl md:text-3xl font-bold text-navy leading-tight mb-4">
@@ -549,7 +549,7 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
                     )}
                   </div>
                   <span
-                    className="mt-5 inline-flex items-center gap-1 font-semibold text-cobalt"
+                    className="mt-5 inline-flex items-center gap-1 font-semibold text-[#6B5CE7]"
                     style={{ fontSize: 14 }}
                   >
                     Read case study

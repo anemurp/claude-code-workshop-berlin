@@ -1,6 +1,7 @@
 import { Hero } from "../components/Hero";
 import { SkillsTicker } from "../components/SkillsTicker";
 import { CaseStudyCards } from "../components/CaseStudyCards";
+import { HowIWork } from "../components/HowIWork";
 import { Testimonials } from "../components/Testimonials";
 import { FloatingVideo } from "../components/FloatingVideo";
 import { caseStudies } from "../case-studies";
@@ -20,8 +21,11 @@ export default function Home() {
         </section>
       </main>
 
+      <HowIWork />
+
       <div style={{ paddingTop: 128 }} />
       <Testimonials />
+      <div style={{ paddingBottom: 96 }} />
       <FloatingVideo />
     </>
   );

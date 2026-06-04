@@ -12,7 +12,7 @@ export default function AboutPage() {
       <div className="mt-8">
         <a
           href="/resume.pdf"
-          className="inline-block px-6 py-3 bg-ink text-paper rounded-full text-sm font-medium hover:opacity-90 transition"
+          className="inline-flex items-center gap-1.5 px-6 py-3 bg-[#6B5CE7] text-white rounded-full text-sm font-medium hover:opacity-85 transition-opacity"
           target="_blank"
           rel="noopener noreferrer"
         >

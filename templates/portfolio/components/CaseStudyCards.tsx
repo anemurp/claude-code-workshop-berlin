@@ -26,12 +26,8 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
         const isHovered = hoveredCard === cs.slug;
         return (
         <li key={cs.slug} style={{ background: "transparent" }}>
-          {/*
-            Outer wrapper: py-10 on desktop gives 40px above/below for the
-            image to overflow into. overflow-hidden on mobile keeps it tidy.
-          */}
           <div
-            className="relative overflow-hidden md:overflow-visible py-0 md:py-10"
+            className="relative overflow-hidden md:overflow-visible md:py-[31px]"
             style={{
               background: "transparent",
               transform: isHovered ? `translateY(-8px) rotate(${tilt}deg) scale(1.03)` : "translateY(0) rotate(0deg) scale(1)",
@@ -49,7 +45,7 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
               the transparent outer wrapper.
             */}
             <div
-              className="absolute inset-x-0 top-0 bottom-0 md:top-10 md:bottom-10 rounded-2xl"
+              className="absolute inset-x-0 top-0 bottom-0 md:top-[31px] md:bottom-[31px] rounded-2xl"
               style={{
                 backgroundColor: cs.cardBackground,
                 boxShadow: isHovered ? "0 24px 64px rgba(0,0,0,0.2)" : "0 8px 32px rgba(0,0,0,0.1)",
