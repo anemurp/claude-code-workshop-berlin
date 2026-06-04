@@ -176,7 +176,7 @@ export function FloatingVideo() {
                     style={{
                       width: "100%",
                       aspectRatio: "16 / 9",
-                      background: "#1A2FD4",
+                      background: "#6B5CE7",
                       position: "relative",
                       overflow: "hidden",
                     }}
@@ -234,7 +234,7 @@ export function FloatingVideo() {
                       width: 52,
                       height: 52,
                       borderRadius: "50%",
-                      background: "#1A2FD4",
+                      background: "#6B5CE7",
                       flexShrink: 0,
                       display: "flex",
                       alignItems: "center",
