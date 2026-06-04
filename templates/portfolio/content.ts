@@ -106,6 +106,7 @@ export const testimonials = {
       name: "Zoe",
       role: "Lead Engineer",
       company: "McGraw Hill",
+      avatarImage: "/images/Zoe.png",
       quote:
         "You are always curious and considerate about the users and always open and engaging with all working partners (engineers, TPMs, product people, designers, a11y people, etc). You do the work of 2 people for 2 teams. I don't know how you did it, but I am very glad that I got to work with you on them!",
       highlight: "You do the work of 2 people for 2 teams.",
@@ -116,6 +117,7 @@ export const testimonials = {
       name: "Marybeth Burris",
       role: "Director of Instructional Design",
       company: "McGraw Hill",
+      avatarImage: "/images/MaryBeth.png",
       quote:
         "This just in... vendor expense at $2 per passage upload for a total of $1,546.00. It's peanuts! Because you made it so easy. This saves me loads of cash for other vendor work I need.",
       highlight: "Because you made it so easy.",
@@ -126,6 +128,7 @@ export const testimonials = {
       name: "Eden Ames",
       role: "UX Manager",
       company: "McGraw Hill",
+      avatarImage: "/images/Eden.png",
       quote:
         "Anna has a high-level of empathy that comes through in everything she does, whether it's asking authors about their processes, seeking feasibility feedback from engineers, or designing delightful user experiences that make for seamless handoff to developers. And she does it all while working across multiple teams.",
       highlight: "Anna has a high-level of empathy that comes through in everything she does.",
@@ -136,6 +139,7 @@ export const testimonials = {
       name: "Rudy Sharar",
       role: "Technical Product Manager",
       company: "McGraw Hill",
+      avatarImage: "/images/Rudy.png",
       quote:
         "Anna crushed the UXR of the long passage activity, student experience from discovery to design, to conducting interviews and synthesizing findings with clarity.",
       highlight: "synthesizing findings with clarity.",
@@ -146,6 +150,7 @@ export const testimonials = {
       name: "Sandy Tanguay",
       role: "Product Manager",
       company: "McGraw Hill",
+      avatarImage: "/images/Sandy.png",
       quote:
         "You were so patient and persistent when we were working through the Teacher Report Improvements while also planning all the BBA version of the reports while being new to Ceres. The results were spot on and appreciated.",
       highlight: "patient and persistent.",
@@ -156,6 +161,7 @@ export const testimonials = {
       name: "Karlina Maya",
       role: "UX Intern",
       company: "McGraw Hill",
+      avatarImage: "/images/Karlina.png",
       quote:
         "I will always value the mentorship you've given me during this early stage of my career. Your creativity, talent, and passion for what you do is inspiring!",
       highlight: "Your creativity, talent, and passion for what you do is inspiring!",

@@ -32,10 +32,25 @@ export function Navbar() {
   }, [open]);
 
   function copyEmail() {
-    navigator.clipboard.writeText("anemurp@gmail.com").then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    const email = "anemurp@gmail.com";
+    const finish = () => { setCopied(true); setTimeout(() => setCopied(false), 2000); };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(email).then(finish).catch(() => fallbackCopy(email, finish));
+    } else {
+      fallbackCopy(email, finish);
+    }
+  }
+
+  function fallbackCopy(text: string, onDone: () => void) {
+    const el = document.createElement("textarea");
+    el.value = text;
+    el.style.position = "fixed";
+    el.style.opacity = "0";
+    document.body.appendChild(el);
+    el.focus();
+    el.select();
+    try { document.execCommand("copy"); onDone(); } catch (_) {}
+    document.body.removeChild(el);
   }
 
   const iconStyle = {
@@ -178,43 +193,54 @@ export function Navbar() {
                 boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
               }}
             >
-              <ul>
-                {navLinks.map((l, i) => (
-                  <li key={l.href} style={{ borderBottom: i < navLinks.length ? "1px solid #F0F0F0" : undefined }}>
-                    <Link
-                      href={l.href}
-                      className="block"
-                      style={{ fontSize: 18, fontWeight: 500, color: pathname === l.href ? "#E8392A" : "#0F0F0F", padding: "14px 0" }}
-                      onClick={() => setOpen(false)}
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-                <li style={{ borderBottom: "1px solid #F0F0F0" }}>
-                  <button
-                    onClick={() => { copyEmail(); setOpen(false); }}
-                    className="flex items-center gap-2 w-full text-left"
-                    style={{ fontSize: 18, fontWeight: 500, color: "#0F0F0F", padding: "14px 0", background: "none", border: "none", cursor: "pointer" }}
-                  >
-                    {copied ? "Copied!" : "Email"} <Mail size={18} />
-                  </button>
-                </li>
-                <li style={{ borderBottom: "1px solid #F0F0F0" }}>
-                  <a
-                    href={hero.ctaPrimary.href}
-                    className="flex items-center gap-2"
-                    style={{ fontSize: 18, fontWeight: 500, color: "#0F0F0F", padding: "14px 0" }}
-                    target="_blank" rel="noopener noreferrer"
+              {/* Nav links — tighter spacing, no individual dividers */}
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {navLinks.map((l) => (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    style={{ fontSize: 18, fontWeight: 500, color: pathname === l.href ? "#E8392A" : "#0F0F0F", padding: "16px 0", textDecoration: "none" }}
                     onClick={() => setOpen(false)}
                   >
-                    LinkedIn
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                  </a>
-                </li>
-              </ul>
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div style={{ height: 1, backgroundColor: "#E0E0E0", margin: "4px 0 16px" }} />
+
+              {/* Contact pills — side by side */}
+              <div style={{ display: "flex", gap: 10 }}>
+                <button
+                  onClick={() => { copyEmail(); setOpen(false); }}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 6,
+                    padding: "8px 16px", borderRadius: 999,
+                    border: "1px solid rgba(0,0,0,0.15)", background: "transparent",
+                    cursor: "pointer", fontSize: 14, fontWeight: 500, color: "#0F0F0F",
+                  }}
+                >
+                  <Mail size={14} />
+                  {copied ? "Copied!" : "Email"}
+                </button>
+                <a
+                  href={hero.ctaPrimary.href}
+                  target="_blank" rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 6,
+                    padding: "8px 16px", borderRadius: 999,
+                    border: "1px solid rgba(0,0,0,0.15)", background: "transparent",
+                    textDecoration: "none", fontSize: 14, fontWeight: 500, color: "#0F0F0F",
+                  }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                  LinkedIn
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

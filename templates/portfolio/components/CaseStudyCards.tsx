@@ -14,7 +14,7 @@ type CardStudy = {
   metrics: Array<{ value: string; label: string }>;
 };
 
-const TRANSITION = "transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease";
+const TRANSITION = "transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease";
 
 export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -34,7 +34,7 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
             className="relative overflow-hidden md:overflow-visible py-0 md:py-10"
             style={{
               background: "transparent",
-              transform: isHovered ? `translateY(-8px) rotate(${tilt}deg)` : "translateY(0) rotate(0deg)",
+              transform: isHovered ? `translateY(-8px) rotate(${tilt}deg) scale(1.03)` : "translateY(0) rotate(0deg) scale(1)",
               transition: TRANSITION,
               transformOrigin: "center bottom",
               cursor: "pointer",

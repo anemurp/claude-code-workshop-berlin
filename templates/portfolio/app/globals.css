@@ -156,6 +156,16 @@ p {
   }
 }
 
+@keyframes progress-fill {
+  from { width: 0% }
+  to   { width: 100% }
+}
+
+@keyframes butterfly-float {
+  0%, 100% { transform: translateY(0px)   rotate(-2deg); }
+  50%       { transform: translateY(-10px) rotate(2deg);  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .butterfly-svg, .butterfly-wing { animation: none !important; }
 }
