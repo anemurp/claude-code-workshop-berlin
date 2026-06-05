@@ -1,8 +1,11 @@
-import { about, skills, experience, contact } from "../../content";
+import { about, skills, experience } from "../../content";
+import { MosaicGrid } from "../../components/MosaicGrid";
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
+    <>
+      <MosaicGrid />
+      <main className="mx-auto max-w-3xl px-6 py-16">
       <h1 className="text-4xl font-bold">{about.heading}</h1>
       <div className="mt-8 space-y-4 text-lg text-ink/80 leading-relaxed">
         {about.paragraphs.map((p, i) => (
@@ -58,30 +61,7 @@ export default function AboutPage() {
           ))}
         </ul>
       </section>
-
-      <section className="mt-12 border-t border-ink/10 pt-10">
-        <h2 className="text-2xl font-semibold mb-4">{contact.heading}</h2>
-        <a
-          href={`mailto:${contact.email}`}
-          className="text-lg text-accent hover:underline"
-        >
-          {contact.email}
-        </a>
-        <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-ink/70">
-          {contact.socials.map((s, i) => (
-            <li key={i}>
-              <a
-                href={s.href}
-                className="hover:text-accent transition"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {s.label} →
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
     </main>
+    </>
   );
 }

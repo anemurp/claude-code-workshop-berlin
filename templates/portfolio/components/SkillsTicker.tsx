@@ -23,8 +23,7 @@ const SKILLS = [
 const ITEMS = [...SKILLS, ...SKILLS];
 
 export function SkillsTicker() {
-  const [isHovered, setIsHovered]       = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -45,7 +44,7 @@ export function SkillsTicker() {
       <div
         aria-hidden="true"
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => { setIsHovered(false); setHoveredIndex(null); }}
+        onMouseLeave={() => setIsHovered(false)}
         style={{
           backgroundColor: "#F0EEF8",
           padding: "20px 0",
@@ -68,8 +67,6 @@ export function SkillsTicker() {
           {ITEMS.map((skill, i) => (
             <span
               key={i}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -81,8 +78,6 @@ export function SkillsTicker() {
                 whiteSpace: "nowrap",
                 color: "#888888",
                 cursor: "default",
-                opacity: isHovered ? (hoveredIndex === i ? 1 : 0.35) : 1,
-                transition: "opacity 0.2s ease",
               }}
             >
               <skill.Icon
