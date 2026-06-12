@@ -25,6 +25,12 @@ export const about = {
     "My distinct background gives me a framework for how people learn, not just how they navigate. This shapes how I run research, how I think about cognitive load, and how I ask forward-looking questions about problems we haven't designed for yet.",
     "Most recently, I led the design of multi-role gamified learning products at McGraw-Hill Education, designing simultaneously for students, teachers, and content authors, while also balancing competing user needs with business priorities across a $2B platform. I bring strong stakeholder management skills and a builder's comfort with ambiguity.",
   ],
+  stats: [
+    { value: "8", label: "0→1 products launched" },
+    { value: "40+", label: "Usability sessions" },
+    { value: "30", label: "Widgets designed" },
+    { value: "15M+", label: "Students impacted" },
+  ],
 };
 
 export const tools = {
@@ -226,6 +232,11 @@ export const tickerRow2 = [
   { icon: "Cpu",        label: "AI products" },
   { icon: "Globe",      label: "Design systems" },
 ];
+
+export const toolsDaily = {
+  heading: "Tools I use daily",
+  body: "I treat my workflow as a living experiment — constantly testing new tools and integrating the ones that actually make the work better. Right now that means building with AI tools like Lovable and V0, not just prompting them. Spotify's in there too, because I make a new playlist every month and good music is non-negotiable.",
+};
 
 export const meta = {
   title: "Anna Murphy — Senior Product Designer",

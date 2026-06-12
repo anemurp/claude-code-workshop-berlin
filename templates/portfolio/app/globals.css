@@ -3,22 +3,26 @@
 @tailwind utilities;
 
 @keyframes bubble-pop {
-  from {
-    transform: scale(0.5);
+  0% {
+    transform: scale(0) rotate(-4deg);
     opacity: 0;
   }
-  to {
-    transform: scale(1);
+  60% {
+    transform: scale(1.18) rotate(3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
     opacity: 1;
   }
 }
 
 .mosaic-bubble {
-  transform-origin: bottom left;
+  transform-origin: 26px bottom;
 }
 
 .mosaic-bubble--visible {
-  animation: bubble-pop 280ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: bubble-pop 380ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .mosaic-bubble::after {

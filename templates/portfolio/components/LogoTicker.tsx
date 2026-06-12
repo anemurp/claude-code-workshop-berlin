@@ -2,19 +2,21 @@
 
 import { useState } from "react";
 
+// Each logo points at a verified full-colour SVG. Most come from Simple Icons'
+// CDN (brand-coloured by default); a few that Simple Icons doesn't carry are
+// sourced from svgl.app instead.
 const LOGOS = [
-  { name: "Figma",      slug: "figma"      },
-  { name: "Notion",     slug: "notion"     },
-  { name: "Grammarly",  slug: "grammarly"  },
-  { name: "Confluence", slug: "confluence" },
-  { name: "Jira",       slug: "jira"       },
-  { name: "Slack",      slug: "slack"      },
-  { name: "Spotify",    slug: "spotify"    },
-  { name: "Claude",     slug: "claude"     },
-  { name: "ChatGPT",    slug: "openai"     },
-  { name: "Lovable",    slug: "lovable"    },
-  { name: "V0",         slug: "v0"         },
-  { name: "Bolt",       slug: "bolt"       },
+  { name: "Figma",   src: "https://cdn.simpleicons.org/figma"   },
+  { name: "Notion",  src: "https://cdn.simpleicons.org/notion"  },
+  { name: "Slack",   src: "https://svgl.app/library/slack.svg"  },
+  { name: "Spotify", src: "https://cdn.simpleicons.org/spotify" },
+  { name: "Claude",  src: "https://cdn.simpleicons.org/claude"  },
+  { name: "ChatGPT", src: "https://svgl.app/library/openai.svg" },
+  { name: "Lovable", src: "https://svgl.app/library/lovable.svg" },
+  { name: "V0",      src: "https://cdn.simpleicons.org/v0"      },
+  { name: "Bolt",    src: "https://svgl.app/library/bolt-new.svg" },
+  { name: "Linear",  src: "https://cdn.simpleicons.org/linear"  },
+  { name: "Framer",  src: "https://cdn.simpleicons.org/framer"  },
 ];
 
 const ITEMS = [...LOGOS, ...LOGOS];
@@ -65,10 +67,11 @@ export function LogoTicker() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`https://cdn.simpleicons.org/${logo.slug}`}
+                src={logo.src}
                 alt={logo.name}
                 width={36}
                 height={36}
+                style={{ objectFit: "contain", maxWidth: 36, maxHeight: 36 }}
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = "none";
                 }}

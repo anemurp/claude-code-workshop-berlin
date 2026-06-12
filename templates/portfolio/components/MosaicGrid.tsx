@@ -158,8 +158,8 @@ function ImageTile({
             maxWidth: bubbleMaxW,
             background: bubble.bg,
             color: bubble.fg,
-            borderRadius: 8,
-            padding: "10px 14px",
+            borderRadius: 20,
+            padding: "12px 18px",
             fontSize: 13,
             fontWeight: 500,
             lineHeight: 1.45,
@@ -249,6 +249,12 @@ export function MosaicGrid() {
         gap: GAP,
         padding: "0 16px",
         boxSizing: "border-box",
+        // Fade the bottom ~72px of the mosaic to transparent so the images
+        // dissolve into the page background and blend into the About section.
+        WebkitMaskImage:
+          "linear-gradient(to bottom, black 0%, black calc(100% - 72px), transparent 100%)",
+        maskImage:
+          "linear-gradient(to bottom, black 0%, black calc(100% - 72px), transparent 100%)",
       }}
     >
       {COLUMNS.map((images, ci) => (

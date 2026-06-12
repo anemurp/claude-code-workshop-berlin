@@ -11,7 +11,7 @@ const products = [
 
 export function ProductGrid() {
   return (
-    <section className="mt-16 border-t border-ink/10 pt-10">
+    <section className="mt-16 pt-10">
       <h2 className="text-2xl font-bold">Products I've shipped</h2>
       <p className="mt-2 text-ink/75">
         From K-12 platforms used by millions, to healthcare SaaS, to my own AI startup.
