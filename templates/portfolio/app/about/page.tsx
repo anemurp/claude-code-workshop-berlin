@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { about, toolsDaily } from "../../content";
 import { MosaicGrid } from "../../components/MosaicGrid";
 import { ProductGrid } from "../../components/ProductGrid";
@@ -11,7 +12,35 @@ export default function AboutPage() {
       <h1 className="text-4xl font-bold">{about.heading}</h1>
       <div className="mt-8 space-y-4 text-lg text-ink/80 leading-relaxed">
         {about.paragraphs.map((p, i) => (
-          <p key={i}>{p}</p>
+          <Fragment key={i}>
+            <p>{p}</p>
+            {i === 0 && (
+              <div className="grid grid-cols-2 gap-4 !my-9">
+                <figure className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/about_pictures/Teaching.png"
+                    alt="Teaching"
+                    className="w-full h-56 object-cover rounded-xl"
+                  />
+                  <figcaption className="absolute -top-3 -right-2 max-w-[80%] rounded-full bg-white px-4 py-1.5 text-xs font-medium text-ink shadow-lg">
+                    From leading classrooms...
+                  </figcaption>
+                </figure>
+                <figure className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/about_pictures/Design.png"
+                    alt="Designing"
+                    className="w-full h-56 object-cover rounded-xl"
+                  />
+                  <figcaption className="absolute -bottom-3 -right-2 max-w-[80%] rounded-full bg-white px-4 py-1.5 text-xs font-medium text-ink shadow-lg">
+                    ...to leading and facilitating design processes
+                  </figcaption>
+                </figure>
+              </div>
+            )}
+          </Fragment>
         ))}
       </div>
       <div className="mt-8">
