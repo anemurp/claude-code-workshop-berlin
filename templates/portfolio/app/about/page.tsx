@@ -1,11 +1,12 @@
-import { about, skills, experience } from "../../content";
+import { about, skills } from "../../content";
 import { MosaicGrid } from "../../components/MosaicGrid";
+import { ProductGrid } from "../../components/ProductGrid";
 
 export default function AboutPage() {
   return (
     <>
       <MosaicGrid />
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="mx-auto max-w-3xl px-6 pb-16 pt-[180px]">
       <h1 className="text-4xl font-bold">{about.heading}</h1>
       <div className="mt-8 space-y-4 text-lg text-ink/80 leading-relaxed">
         {about.paragraphs.map((p, i) => (
@@ -23,7 +24,11 @@ export default function AboutPage() {
         </a>
       </div>
 
-      <section className="mt-16 border-t border-ink/10 pt-10">
+      <div className="mt-[180px]">
+        <ProductGrid />
+      </div>
+
+      <section className="mt-[180px] border-t border-ink/10 pt-10">
         <h2 className="text-2xl font-semibold mb-6">{skills.heading}</h2>
         <div className="space-y-5">
           {skills.groups.map((group, i) => (
@@ -44,23 +49,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mt-12 border-t border-ink/10 pt-10">
-        <h2 className="text-2xl font-semibold mb-6">{experience.heading}</h2>
-        <ul className="space-y-8">
-          {experience.roles.map((role, i) => (
-            <li key={i}>
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="font-medium">
-                  {role.title} ·{" "}
-                  <span className="text-ink/60">{role.company}</span>
-                </h3>
-                <span className="text-sm text-ink/50 shrink-0">{role.period}</span>
-              </div>
-              <p className="mt-2 text-ink/75 leading-relaxed">{role.summary}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
     </main>
     </>
   );

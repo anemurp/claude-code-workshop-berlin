@@ -267,7 +267,7 @@ export function Hero() {
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src="/images/photo.png"
+                  src="/coworker-avatars/photo.png"
                   alt="Anna Murphy"
                   onError={() => setPhotoError(true)}
                   style={{

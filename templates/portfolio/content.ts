@@ -21,10 +21,15 @@ export const hero = {
 export const about = {
   heading: "About",
   paragraphs: [
-    "I'm a product designer with seven years of experience across fintech, e-commerce, and developer tools. I care about the unglamorous parts of design — error states, edge cases, and the slow trust-building between a product and its users.",
-    "Before design, I studied philosophy in Munich. It turns out a lot of design is just disciplined thinking about what people actually need versus what they say they want.",
-    "Outside work I climb (poorly), read (constantly), and run a small Sunday breakfast club in Neukölln.",
+    "I have 10 years of experience designing dynamic experiences for humans: 5 years designing learning experiences in the classroom, and 5 years as a UX designer working cross-functionally in enterprise companies and early-stage startups.",
+    "My distinct background gives me a framework for how people learn, not just how they navigate. This shapes how I run research, how I think about cognitive load, and how I ask forward-looking questions about problems we haven't designed for yet.",
+    "Most recently, I led the design of multi-role gamified learning products at McGraw-Hill Education, designing simultaneously for students, teachers, and content authors, while also balancing competing user needs with business priorities across a $2B platform. I bring strong stakeholder management skills and a builder's comfort with ambiguity.",
   ],
+};
+
+export const tools = {
+  heading: "Tools I use daily",
+  body: "From research to handoff, these are the tools I reach for every day.",
 };
 
 export const experience = {
