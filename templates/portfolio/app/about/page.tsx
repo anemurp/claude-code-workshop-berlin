@@ -54,12 +54,12 @@ export default function AboutPage() {
         </a>
       </div>
 
-      <section className="relative mt-16 overflow-hidden rounded-3xl">
+      <section className="relative mt-16 overflow-visible">
         <div
           aria-hidden="true"
-          className="absolute inset-x-[-15%] inset-y-2 -skew-y-2 bg-[#6B5CE7]/[0.06]"
+          className="absolute inset-0 rounded-3xl bg-[#6B5CE7]/[0.06]"
         />
-        <div className="relative grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 px-4 py-12">
+        <div className="relative grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 p-12">
           {about.stats.map((stat, i) => (
             <div key={i} className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-[#6B5CE7]">
