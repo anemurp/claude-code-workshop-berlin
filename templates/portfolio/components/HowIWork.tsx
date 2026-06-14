@@ -81,7 +81,7 @@ export function HowIWork() {
                 >
                   <span
                     className="text-sm font-medium tabular-nums w-8 md:w-14 shrink-0 transition-colors duration-150"
-                    style={{ color: isOpen ? "#6B5CE7" : "#BBBBBB" }}
+                    style={{ color: "#6B5CE7" }}
                   >
                     {item.number}
                   </span>

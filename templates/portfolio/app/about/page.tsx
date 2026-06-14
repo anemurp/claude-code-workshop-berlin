@@ -23,7 +23,7 @@ export default function AboutPage() {
                     alt="Teaching"
                     className="w-full h-56 object-cover rounded-xl"
                   />
-                  <figcaption className="absolute -top-3 -right-2 max-w-[80%] rounded-full bg-white px-4 py-1.5 text-xs font-medium text-ink shadow-lg">
+                  <figcaption className="absolute -top-3 -left-2 max-w-[80%] rounded-full bg-white px-4 py-1.5 text-xs font-medium text-ink shadow-lg">
                     From leading classrooms...
                   </figcaption>
                 </figure>

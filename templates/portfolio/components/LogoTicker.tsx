@@ -6,17 +6,17 @@ import { useState } from "react";
 // CDN (brand-coloured by default); a few that Simple Icons doesn't carry are
 // sourced from svgl.app instead.
 const LOGOS = [
-  { name: "Figma",   src: "https://cdn.simpleicons.org/figma"   },
-  { name: "Notion",  src: "https://cdn.simpleicons.org/notion"  },
-  { name: "Slack",   src: "https://svgl.app/library/slack.svg"  },
-  { name: "Spotify", src: "https://cdn.simpleicons.org/spotify" },
-  { name: "Claude",  src: "https://cdn.simpleicons.org/claude"  },
+  { name: "Notion",  src: "https://svgl.app/library/notion.svg" },
+  { name: "Figma",   src: "https://svgl.app/library/figma.svg"  },
   { name: "ChatGPT", src: "https://svgl.app/library/openai.svg" },
-  { name: "Lovable", src: "https://svgl.app/library/lovable.svg" },
-  { name: "V0",      src: "https://cdn.simpleicons.org/v0"      },
+  { name: "Slack",   src: "https://svgl.app/library/slack.svg"  },
+  { name: "V0",      src: "https://svgl.app/library/v0_dark.svg" },
+  { name: "Spotify", src: "https://svgl.app/library/spotify.svg" },
   { name: "Bolt",    src: "https://svgl.app/library/bolt-new.svg" },
-  { name: "Linear",  src: "https://cdn.simpleicons.org/linear"  },
-  { name: "Framer",  src: "https://cdn.simpleicons.org/framer"  },
+  { name: "Claude",  src: "https://svgl.app/library/claude-ai-icon.svg" },
+  { name: "Granola", src: "https://svgl.app/library/granola-light.svg" },
+  { name: "Lovable", src: "https://svgl.app/library/lovable.svg" },
+  { name: "Framer",  src: "https://svgl.app/library/framer.svg" },
 ];
 
 const ITEMS = [...LOGOS, ...LOGOS];

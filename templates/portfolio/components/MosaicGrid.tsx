@@ -16,18 +16,23 @@ const BUBBLES: Record<string, BubbleConfig> = {
     bg: "#2D7FF9",
     fg: "#ffffff",
   },
-  "/about_pictures/Teaching.png": {
-    text: "5 years as a middle and high school Spanish teacher",
+  "/about_pictures/mountain.jpeg": {
+    text: "I am Mexican-American and grew up speaking Spanish and English",
+    bg: "#6B5CE7",
+    fg: "#ffffff",
+  },
+  "/about_pictures/arifana.jpg": {
+    text: "Catch me taking pictures with my film camera everywhere I go!",
     bg: "#00C853",
     fg: "#ffffff",
   },
   "/about_pictures/denmark.jpeg": {
-    text: "30 countries before turning 30",
+    text: "I traveled to 30 countries before turning 30",
     bg: "#FF3D81",
     fg: "#ffffff",
   },
   "/about_pictures/climbing.jpeg": {
-    text: "Outdoor time keeps me sane",
+    text: "I love to spend time outdoors to recharge",
     bg: "#FF6B35",
     fg: "#ffffff",
   },
@@ -41,10 +46,10 @@ const BUBBLES: Record<string, BubbleConfig> = {
 // ── Column data ───────────────────────────────────────────────────────────────
 const COLUMNS = [
   [
-    { src: "/about_pictures/Design.png",    height: 280 },
+    { src: "/about_pictures/mountain.jpeg", height: 280 },
     { src: "/about_pictures/denmark.jpeg",  height: 220 },
-    { src: "/about_pictures/mountain.jpeg", height: 240 },
-    { src: "/about_pictures/Design.png",    height: 280 },
+    { src: "/about_pictures/sunset Small.jpeg", height: 240 },
+    { src: "/about_pictures/mountain.jpeg", height: 280 },
   ],
   [
     { src: "/about_pictures/salt.jpeg",     height: 240 },
@@ -53,9 +58,9 @@ const COLUMNS = [
     { src: "/about_pictures/climbing.jpeg", height: 220 },
   ],
   [
-    { src: "/about_pictures/Teaching.png",  height: 280 },
+    { src: "/about_pictures/arifana.jpg",  height: 280 },
     { src: "/about_pictures/Italy.jpeg",    height: 260 },
-    { src: "/about_pictures/Teaching.png",  height: 280 },
+    { src: "/about_pictures/arifana.jpg",  height: 280 },
     { src: "/about_pictures/Italy.jpeg",    height: 260 },
   ],
 ];

@@ -235,7 +235,7 @@ export const tickerRow2 = [
 
 export const toolsDaily = {
   heading: "Tools I use daily",
-  body: "I treat my workflow as a living experiment — constantly testing new tools and integrating the ones that actually make the work better. Right now that means building with AI tools like Lovable and V0, not just prompting them. Spotify's in there too, because I make a new playlist every month and good music is non-negotiable.",
+  body: "I treat my workflow as a living experiment, by constantly testing new tools and integrating the ones that actually make the work better. Right now that means building with AI tools (like this portfolio), using Claude and Lovable to iterate quickly and collaborate with engineering. Spotify's in there too because I make a new playlist every month and good music is a non-negotiable.",
 };
 
 export const meta = {
