@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 // Each card shares the same DNA as the case studies (image, title, description,
-// tags, links) but is intentionally lighter and more experimental: a neutral
-// card on a subtle border + shadow, rather than the bold full-bleed colour of
+// tags, links) but is intentionally lighter and more experimental: a neutral,
+// static card on a subtle border, rather than the bold full-bleed colour of
 // the case study cards.
 //
 // To add a real thumbnail, drop the file into /public and set `thumbnail` to
@@ -55,7 +54,7 @@ const PROJECTS: AiProject[] = [
   },
   {
     // SCREENSHOT: common-ground.png
-    thumbnail: "",
+    thumbnail: "/assets/ai projects/CommonGround.png",
     title: "Common Ground",
     description:
       "A Berlin events app where you can see which mutuals are going, connect beforehand, and build a group — pitched in 2 minutes at a Lovable hackathon.",
@@ -73,16 +72,14 @@ const PROJECTS: AiProject[] = [
 
 export function AiProjectCards() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 items-stretch gap-6">
       {PROJECTS.map((p) => (
-        <motion.div
+        <div
           key={p.title}
-          whileHover={{ y: -6 }}
-          transition={{ type: "spring", stiffness: 300, damping: 22 }}
-          className="flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm hover:shadow-md"
+          className="flex h-full flex-col overflow-hidden rounded-2xl border border-black/[0.08] bg-[#FAFAFA]"
         >
-          {/* Thumbnail (16:9) */}
-          <div className="aspect-[16/9] w-full overflow-hidden bg-ink/5">
+          {/* Thumbnail — slightly taller on desktop, a touch shorter on mobile */}
+          <div className="aspect-[16/9] sm:aspect-[16/10] w-full overflow-hidden bg-ink/5">
             {p.thumbnail ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -97,53 +94,54 @@ export function AiProjectCards() {
             )}
           </div>
 
-          {/* Body */}
-          <div className="flex flex-1 flex-col p-5">
+          {/* Body — tighter padding on mobile, a little roomier on desktop */}
+          <div className="flex flex-1 flex-col px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
             {/* Tag pills */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {p.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-ink/15 bg-ink/5 px-2.5 py-1 text-xs text-ink/70"
+                  className="rounded-full bg-[#F0F0F0] px-2 py-0.5 text-[11px] text-ink/70"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            {/* Title + description */}
-            <h2 className="mt-4 text-lg font-semibold text-ink">{p.title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-ink/70">
+            {/* Title + description (shown in full) */}
+            <h2 className="mt-3 text-[22px] font-bold leading-tight text-ink">{p.title}</h2>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-ink/70">
               {p.description}
             </p>
 
-            {/* Links (pinned to the bottom so cards stay equal height) */}
-            <div className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-5">
-              {p.links.map((link) =>
-                link.external ? (
+            {/* Links — first link is the primary solid button, any further link
+                is a secondary text link. They stack full-width on mobile. */}
+            <div className="mt-auto flex flex-col gap-2 pt-4 sm:flex-row sm:gap-3">
+              {p.links.map((link, i) => {
+                const classes =
+                  i === 0
+                    ? "inline-flex h-11 w-full items-center justify-center rounded-full bg-[#6B5CE7] px-4 text-sm font-medium text-white transition-colors hover:bg-[#5849d6] sm:h-9 sm:w-auto"
+                    : "inline-flex h-11 w-full items-center justify-center rounded-full border border-[#6B5CE7] px-4 text-sm font-medium text-[#6B5CE7] transition-colors hover:bg-[#6B5CE7] hover:text-white sm:h-9 sm:w-auto";
+                return link.external ? (
                   <a
                     key={link.label}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium text-accent hover:underline"
                     title={link.note}
+                    className={classes}
                   >
-                    {link.label} →
+                    {link.label}
                   </a>
                 ) : (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    className="text-sm font-medium text-accent hover:underline"
-                  >
-                    {link.label} →
+                  <Link key={link.label} href={link.href} className={classes}>
+                    {link.label}
                   </Link>
-                )
-              )}
+                );
+              })}
             </div>
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

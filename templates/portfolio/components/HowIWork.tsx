@@ -53,7 +53,7 @@ export function HowIWork() {
   }
 
   return (
-    <section className="mx-auto max-w-3xl px-6" style={{ paddingTop: 112 }}>
+    <section className="mx-auto max-w-3xl px-6" style={{ paddingTop: 128 }}>
       <h2 style={{ marginBottom: 24, fontSize: 28, fontWeight: 600 }}>
         How I work
       </h2>

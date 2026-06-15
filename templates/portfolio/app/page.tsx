@@ -23,7 +23,7 @@ export default function Home() {
 
       <HowIWork />
 
-      <div style={{ paddingTop: 128 }} />
+      <div style={{ paddingTop: 64 }} />
       <Testimonials />
       <div style={{ paddingBottom: 96 }} />
       <FloatingVideo />
