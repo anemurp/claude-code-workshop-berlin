@@ -17,6 +17,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hovered, setHovered] = useState<"email" | "linkedin" | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -122,16 +123,16 @@ export function Navbar() {
               aria-label="Copy email address"
               className="relative"
               style={iconStyle}
-              onMouseEnter={e => (e.currentTarget.style.background = "rgba(180, 170, 220, 0.25)")}
-              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(180, 170, 220, 0.25)"; setHovered("email"); }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; setHovered(null); }}
             >
               <Mail size={20} />
-              {copied && (
+              {(copied || hovered === "email") && (
                 <span
-                  className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded whitespace-nowrap"
-                  style={{ backgroundColor: "#0F0F0F", color: "#fff" }}
+                  className="absolute top-9 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded whitespace-nowrap"
+                  style={{ backgroundColor: "#6B5CE7", color: "#fff" }}
                 >
-                  Copied!
+                  {copied ? "Copied!" : "copy email"}
                 </span>
               )}
             </button>
@@ -142,13 +143,22 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
+              className="relative"
               style={iconStyle}
-              onMouseEnter={e => (e.currentTarget.style.background = "rgba(180, 170, 220, 0.25)")}
-              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(180, 170, 220, 0.25)"; setHovered("linkedin"); }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; setHovered(null); }}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
               </svg>
+              {hovered === "linkedin" && (
+                <span
+                  className="absolute top-9 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded whitespace-nowrap"
+                  style={{ backgroundColor: "#6B5CE7", color: "#fff" }}
+                >
+                  go to linkedin
+                </span>
+              )}
             </a>
 
           </div>
