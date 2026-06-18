@@ -1,42 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const PURPLE = "#6B5CE7"; // used for the callout card title
 
-// --- The modified Double Diamond diagram -----------------------------------
-// Discover / Define / Deliver are small solid triangles (half-height 35 from
-// the centre line at y=250). Develop is a tall triangle (half-height 150)
-// rendered as five nested layers going light → dark to show the AI-led → Human-led
-// gradient. Click a phase to reveal the matching copy.
-
-type SimplePhase = {
-  id: string;
-  name: string;
-  fill: string;
-  points: string;
-  labelX: number;
-  labelY: number;
-  angle: number;
-};
-
-// Discover, Define, Deliver — solid fills, white labels.
-const SIMPLE_PHASES: SimplePhase[] = [
-  { id: "discover", name: "Discover", fill: "#FF6B35", points: "40,250 130,215 220,250 130,285", labelX: 130, labelY: 250, angle: -15 },
-  { id: "define", name: "Define", fill: "#FF3D81", points: "220,250 265,215 300,250 265,285", labelX: 252, labelY: 250, angle: 15 },
-  { id: "deliver", name: "Deliver", fill: "#00C853", points: "430,250 495,215 560,250 495,285", labelX: 495, labelY: 250, angle: 15 },
-];
-
-// Develop — five nested triangles, same left tip (300,250) and right edge at
-// x=430, with evenly stepped half-heights from 150 (outer) to 30 (inner).
-const DEVELOP_LAYERS = [
-  { half: 150, color: "#CECBF6" },
-  { half: 118, color: "#AFA9EC" },
-  { half: 86, color: "#7F77DD" },
-  { half: 54, color: "#534AB7" },
-  { half: 22, color: "#3C3489" },
-];
+// --- Double Diamond diagram ------------------------------------------------
+// Discover (red) and Define (pink) form the first diamond, Develop is the big
+// layered-purple second diamond (AI-led light → human-led dark), and Deliver
+// (blue) closes it. Click any phase to reveal the matching copy below.
 
 const CALLOUTS: Record<string, { name: string; callout: string }> = {
   discover: {
@@ -64,98 +36,63 @@ const CALLOUTS: Record<string, { name: string; callout: string }> = {
 function DoubleDiamond() {
   const [active, setActive] = useState<string | null>(null);
   const current = active ? CALLOUTS[active] : null;
+  const calloutRef = useRef<HTMLDivElement>(null);
+
+  const toggle = (id: string) => setActive(active === id ? null : id);
+
+  // When a phase is clicked, smoothly scroll the surfaced text into view.
+  useEffect(() => {
+    if (active && calloutRef.current) {
+      calloutRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [active]);
 
   return (
     <div>
-      <p className="mb-2 text-xs text-ink/45">Click a phase to learn more</p>
-
       <svg
-        viewBox="0 80 600 380"
         width="100%"
+        viewBox="0 0 820 460"
+        preserveAspectRatio="xMidYMid meet"
         className="h-auto w-full"
         role="img"
-        aria-label="A modified double diamond diagram: Discover, Define and Deliver are small equal phases, Develop is a much larger, layered phase."
       >
-        {/* Discover, Define, Deliver — solid triangles */}
-        {SIMPLE_PHASES.map((ph) => (
-          <polygon
-            key={ph.id}
-            points={ph.points}
-            fill={ph.fill}
-            className="cursor-pointer transition-opacity duration-200 hover:opacity-[0.85]"
-            onClick={() => setActive(active === ph.id ? null : ph.id)}
-          />
-        ))}
+        <title>Double Diamond diagram showing Discover, Define, Develop, Deliver</title>
+        <desc>Double Diamond structure with Discover in red, Define in pink, Develop as layered purple triangles, and Deliver in blue. Labels outside shapes along diagonal edges, Problem and Solution labels at the far ends.</desc>
 
-        {/* Develop — five nested triangles, outer (light) to inner (dark) */}
-        <g
-          className="cursor-pointer transition-opacity duration-200 hover:opacity-[0.85]"
-          onClick={() => setActive(active === "develop" ? null : "develop")}
-        >
-          {DEVELOP_LAYERS.map((ly) => (
-            <polygon key={ly.half} points={`300,250 430,${250 - ly.half} 430,${250 + ly.half}`} fill={ly.color} />
-          ))}
+        <g className="phase" id="ph-discover" onClick={() => toggle('discover')} style={{ cursor: 'pointer' }}>
+          <polygon points="80,250 170,215 170,285" fill="#E63946" />
         </g>
+        <g className="phase" id="ph-define" onClick={() => toggle('define')} style={{ cursor: 'pointer' }}>
+          <polygon points="170,215 260,250 170,285" fill="#FF3D81" />
+        </g>
+        <polygon points="80,250 170,215 260,250 170,285" fill="none" stroke="#1a1a2e" strokeWidth="1.5" opacity="0.12" />
 
-        {/* Phase name labels — white, rotated to sit on the diagonal edges */}
-        {SIMPLE_PHASES.map((ph) => (
-          <text
-            key={`${ph.id}-label`}
-            x={ph.labelX}
-            y={ph.labelY}
-            transform={`rotate(${ph.angle} ${ph.labelX} ${ph.labelY})`}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fontSize="13"
-            fontWeight="600"
-            fill="#FFFFFF"
-            className="pointer-events-none select-none"
-          >
-            {ph.name}
-          </text>
-        ))}
-        <text
-          x="354"
-          y="163"
-          transform="rotate(-49 354 163)"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontSize="13"
-          fontWeight="600"
-          fill="#3C3489"
-          className="pointer-events-none select-none"
-        >
-          Develop
-        </text>
+        <g className="phase" id="ph-develop" onClick={() => toggle('develop')} style={{ cursor: 'pointer' }}>
+          <polygon points="260,250 650,60 650,440" fill="#CECBF6" />
+          <polygon points="260,250 650,92 650,408" fill="#AFA9EC" />
+          <polygon points="260,250 650,124 650,376" fill="#8B82E0" />
+          <polygon points="260,250 650,156 650,344" fill="#534AB7" />
+          <polygon points="260,250 650,188 650,312" fill="#3C3489" />
+        </g>
+        <g className="phase" id="ph-deliver" onClick={() => toggle('deliver')} style={{ cursor: 'pointer' }}>
+          <polygon points="650,60 740,250 650,440" fill="#2D7FF9" />
+        </g>
+        <polygon points="260,250 650,60 740,250 650,440" fill="none" stroke="#1a1a2e" strokeWidth="1.5" opacity="0.12" />
 
-        {/* Endpoint dots at the far-left and far-right tips */}
-        <circle cx="40" cy="250" r="5" fill="#0F0F0F" />
-        <circle cx="560" cy="250" r="5" fill="#0F0F0F" />
+        <text x="108" y="217" textAnchor="middle" fill="#E63946" style={{ fontWeight: 700, fontSize: 15 }} transform="rotate(-23, 108, 217)">Discover</text>
+        <text x="218" y="217" textAnchor="middle" fill="#FF3D81" style={{ fontWeight: 700, fontSize: 15 }} transform="rotate(23, 218, 217)">Define</text>
+        <text x="430" y="138" textAnchor="middle" fill="#3C3489" style={{ fontWeight: 700, fontSize: 16 }} transform="rotate(-28, 430, 138)">Develop</text>
+        <text x="708" y="135" textAnchor="middle" fill="#2D7FF9" style={{ fontWeight: 700, fontSize: 15 }} transform="rotate(64, 708, 135)">Deliver</text>
 
-        {/* Problem Definition node at the centre join */}
-        <circle cx="300" cy="250" r="28" fill="#FFFFFF" stroke="#0F0F0F" strokeWidth="1.5" />
-        <text x="300" y="247" textAnchor="middle" fontSize="9" fontWeight="600" fill="#0F0F0F" className="pointer-events-none select-none">
-          Problem
-        </text>
-        <text x="300" y="259" textAnchor="middle" fontSize="9" fontWeight="600" fill="#0F0F0F" className="pointer-events-none select-none">
-          Definition
-        </text>
+        <circle cx="80" cy="250" r="7" fill="#1a1a2e" />
+        <circle cx="740" cy="250" r="7" fill="#1a1a2e" />
 
-        {/* Develop legend: AI-led (light) → Human-led (dark) */}
-        <rect x="302" y="416" width="14" height="14" fill="#CECBF6" />
-        <text x="321" y="426" fontSize="11" fill="#888888" className="pointer-events-none select-none">
-          AI-led
-        </text>
-        <text x="352" y="426" fontSize="11" fill="#888888" className="pointer-events-none select-none">
-          →
-        </text>
-        <rect x="366" y="416" width="14" height="14" fill="#3C3489" />
-        <text x="385" y="426" fontSize="11" fill="#888888" className="pointer-events-none select-none">
-          Human-led
-        </text>
+        <text x="30" y="250" textAnchor="middle" dominantBaseline="central" fill="#1a1a2e" style={{ fontWeight: 700, fontSize: 14 }}>Problem</text>
+        <text x="790" y="250" textAnchor="middle" dominantBaseline="central" fill="#1a1a2e" style={{ fontWeight: 700, fontSize: 14 }}>Solution</text>
       </svg>
 
       {/* Click callout — fades in below the diagram, swaps smoothly between phases */}
+      <div ref={calloutRef} className="scroll-mt-24">
       <AnimatePresence mode="wait">
         {current && (
           <motion.div
@@ -175,6 +112,7 @@ function DoubleDiamond() {
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
     </div>
   );
 }
