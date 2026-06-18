@@ -45,7 +45,7 @@ const PROJECTS: AiProject[] = [
   },
   {
     // SCREENSHOT: vaulty.png
-    thumbnail: "",
+    thumbnail: "/assets/ai%20projects/vaulty.png",
     title: "Vaulty",
     description:
       "A children's budgeting and allowance tracking app — built with Lovable and Claude Code in 2 hours.",
