@@ -130,9 +130,9 @@ export function Navbar() {
               {(copied || hovered === "email") && (
                 <span
                   className="absolute top-9 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded whitespace-nowrap"
-                  style={{ backgroundColor: "#6B5CE7", color: "#fff" }}
+                  style={{ backgroundColor: "#000000", color: "#fff" }}
                 >
-                  {copied ? "Copied!" : "copy email"}
+                  {copied ? "Copied!" : "Copy email"}
                 </span>
               )}
             </button>
@@ -154,9 +154,9 @@ export function Navbar() {
               {hovered === "linkedin" && (
                 <span
                   className="absolute top-9 left-1/2 -translate-x-1/2 text-xs px-2 py-1 rounded whitespace-nowrap"
-                  style={{ backgroundColor: "#6B5CE7", color: "#fff" }}
+                  style={{ backgroundColor: "#000000", color: "#fff" }}
                 >
-                  go to linkedin
+                  Go to linkedin
                 </span>
               )}
             </a>

@@ -18,6 +18,9 @@ const TRANSITION = "transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shado
 
 export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  // Position of the custom "view case study" cursor that follows the mouse
+  // while a card is hovered. Null when no card is hovered.
+  const [cursorPos, setCursorPos] = useState<{ x: number; y: number } | null>(null);
 
   return (
     <ul className="space-y-6">
@@ -33,10 +36,11 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
               transform: isHovered ? `translateY(-8px) rotate(${tilt}deg) scale(1.03)` : "translateY(0) rotate(0deg) scale(1)",
               transition: TRANSITION,
               transformOrigin: "center bottom",
-              cursor: "pointer",
+              cursor: "none",
             }}
             onMouseEnter={() => setHoveredCard(cs.slug)}
-            onMouseLeave={() => setHoveredCard(null)}
+            onMouseMove={(e) => setCursorPos({ x: e.clientX, y: e.clientY })}
+            onMouseLeave={() => { setHoveredCard(null); setCursorPos(null); }}
           >
 
             {/*
@@ -55,7 +59,7 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
             />
 
             {/* Content layer — sits above background, free to overflow */}
-            <Link href={`/case-studies/${cs.slug}`} className="block relative" style={{ zIndex: 1 }}>
+            <Link href={`/case-studies/${cs.slug}`} className="block relative" style={{ zIndex: 1, cursor: "none" }}>
               <div className="grid grid-cols-1 md:grid-cols-2">
 
                 {/* Left: text */}
@@ -148,6 +152,32 @@ export function CaseStudyCards({ studies }: { studies: CardStudy[] }) {
         </li>
         );
       })}
+
+      {/* Custom cursor — a small purple pill that follows the mouse while a
+          card is hovered. pointerEvents:none so it never blocks the link. */}
+      {cursorPos && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: "fixed",
+            top: cursorPos.y,
+            left: cursorPos.x,
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "#000000",
+            color: "white",
+            fontSize: 12,
+            fontWeight: 500,
+            padding: "10px 18px",
+            borderRadius: 999,
+            whiteSpace: "nowrap",
+            pointerEvents: "none",
+            zIndex: 9999,
+            boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
+          }}
+        >
+          View case study
+        </div>
+      )}
     </ul>
   );
 }

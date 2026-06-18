@@ -29,17 +29,17 @@ type AiProject = {
 const PROJECTS: AiProject[] = [
   {
     // SCREENSHOT: berghain-simulator.png
-    thumbnail: "",
+    thumbnail: "/assets/ai%20projects/Berghain.png",
     title: "Berghain Simulator",
     description:
       "A Berlin survival game built at an AI hackathon in 2 days — get past the bouncer using cultural fluency and restraint.",
     tags: ["Game Design", "Prompt Engineering", "Hackathon", "2026"],
     links: [
-      { label: "Play the game", href: "#", external: true },
+      { label: "Play the game", href: "https://stellar-pastelito-b88917.netlify.app/", external: true },
       {
         label: "Read case study",
-        href: "/ai-projects/berghain-simulator",
-        external: false,
+        href: "https://www.linkedin.com/pulse/ai-hackathon-most-berlin-game-ever-anna-murphy-6kenf/",
+        external: true,
       },
     ],
   },

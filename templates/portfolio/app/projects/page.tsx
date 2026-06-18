@@ -13,6 +13,15 @@ export default function ProjectsPage() {
         </span>
       </h1>
 
+      <div className="mt-8 flex justify-center">
+        <a
+          href="#ai-philosophy"
+          className="inline-flex h-11 items-center justify-center rounded-full bg-[#6B5CE7] px-6 text-sm font-medium text-white transition-colors hover:bg-[#5849d6]"
+        >
+          Read how I use AI
+        </a>
+      </div>
+
       <div className="mt-32">
         <AiProjectCards />
       </div>

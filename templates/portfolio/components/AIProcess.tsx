@@ -181,7 +181,7 @@ function DoubleDiamond() {
 
 export function AIProcess() {
   return (
-    <section className="mt-32">
+    <section id="ai-philosophy" className="mt-32 scroll-mt-24">
       <h2 style={{ fontSize: 28, fontWeight: 600 }}>How AI fits into my design process</h2>
 
       <p className="mt-4 text-sm leading-relaxed" style={{ color: "#666666" }}>
