@@ -4,9 +4,15 @@ import { caseStudies } from "../../case-studies";
 export default function CaseStudiesPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
-      <h2 className="mb-2">Case Studies</h2>
-      <h3 className="text-2xl mb-10" style={{ color: "var(--muted)" }}>Selected work</h3>
-      <CaseStudyCards studies={caseStudies} />
+      <h1 className="text-4xl font-bold leading-[1.25] text-center">
+        <span className="block text-ink">Case Studies</span>
+        <span className="block text-[color:var(--accent-purple)]">
+          End-to-end, from ambiguity to shipped.
+        </span>
+      </h1>
+      <div className="mt-10">
+        <CaseStudyCards studies={caseStudies} />
+      </div>
     </main>
   );
 }

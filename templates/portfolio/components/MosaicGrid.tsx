@@ -46,29 +46,40 @@ const BUBBLES: Record<string, BubbleConfig> = {
 // ── Column data ───────────────────────────────────────────────────────────────
 const COLUMNS = [
   [
-    { src: "/about_pictures/mountain.jpeg", height: 280 },
-    { src: "/about_pictures/denmark.jpeg",  height: 220 },
-    { src: "/about_pictures/sunset Small.jpeg", height: 240 },
-    { src: "/about_pictures/mountain.jpeg", height: 280 },
+    { src: "/about_pictures/mountain.jpeg", height: 300, position: "center 78%" },
+    { src: "/about_pictures/denmark.jpeg",  height: 240 },
+    { src: "/about_pictures/sunset Small.jpeg", height: 260 },
+    { src: "/about_pictures/mountain.jpeg", height: 300, position: "center 78%" },
   ],
   [
-    { src: "/about_pictures/salt.jpeg",     height: 240 },
-    { src: "/about_pictures/climbing.jpeg", height: 220 },
-    { src: "/about_pictures/salt.jpeg",     height: 240 },
-    { src: "/about_pictures/climbing.jpeg", height: 220 },
+    { src: "/about_pictures/salt.jpeg",     height: 260 },
+    { src: "/about_pictures/climbing.jpeg", height: 240 },
+    { src: "/about_pictures/salt.jpeg",     height: 260 },
+    { src: "/about_pictures/climbing.jpeg", height: 240 },
   ],
   [
-    { src: "/about_pictures/arifana.jpg",  height: 280 },
-    { src: "/about_pictures/Italy.jpeg",    height: 260 },
-    { src: "/about_pictures/arifana.jpg",  height: 280 },
-    { src: "/about_pictures/Italy.jpeg",    height: 260 },
+    { src: "/about_pictures/arifana.jpg",  height: 300 },
+    { src: "/about_pictures/Italy.jpeg",    height: 280 },
+    { src: "/about_pictures/arifana.jpg",  height: 300 },
+    { src: "/about_pictures/Italy.jpeg",    height: 280 },
   ],
 ];
 
 // ── Parallax config ───────────────────────────────────────────────────────────
-const SPEEDS = [-80, 60, -100];
-const INITIAL_Y = SPEEDS.map((s) => (s > 0 ? -s : 0));
-const CONTAINER_H = 540;
+// How far (in px) each column slides upward over the pinned scroll. Tuned per
+// column so that when the pin ends, the third image in each column is fully
+// revealed. (All negative = all columns slide up to uncover lower rows.)
+const SPEEDS = [-350, -310, -430];
+// Nudge every column down a little so the top of the first images isn't clipped.
+const TOP_OFFSET = 24;
+const INITIAL_Y = SPEEDS.map((s) => (s > 0 ? -s : 0) + TOP_OFFSET);
+const CONTAINER_H = 556;
+// How many pixels of scrolling the mosaic stays pinned for while it reveals the
+// next level of images. Bigger = the mosaic stays sticky longer.
+const PIN_SCROLL = 600;
+// Height of the sticky navbar above the mosaic (Tailwind h-14 = 56px). The
+// mosaic pins right below it so it sticks from the very first scroll.
+const NAV_OFFSET = 56;
 const GAP = 12;
 const DESKTOP_BUBBLE_W = 240;
 const MOBILE_BUBBLE_W = 180;
@@ -77,6 +88,7 @@ const MOBILE_BUBBLE_W = 180;
 function ImageTile({
   src,
   height,
+  position,
   bubble,
   tileId,
   activeTouchId,
@@ -85,6 +97,7 @@ function ImageTile({
 }: {
   src: string;
   height: number;
+  position?: string;
   bubble?: BubbleConfig;
   tileId: string;
   activeTouchId: string | null;
@@ -146,6 +159,7 @@ function ImageTile({
           width: "100%",
           height,
           objectFit: "cover",
+          objectPosition: position ?? "center",
           borderRadius: 10,
           display: "block",
         }}
@@ -183,10 +197,12 @@ function ImageTile({
 }
 
 // ── Parallax helper ───────────────────────────────────────────────────────────
+// The mosaic pins at NAV_OFFSET. As you scroll, the wrapper's top edge moves
+// from NAV_OFFSET up to NAV_OFFSET - PIN_SCROLL. We turn that into a 0 → 1
+// progress value that drives the reveal.
 function getProgress(el: HTMLElement) {
   const rect = el.getBoundingClientRect();
-  const total = window.innerHeight + rect.height;
-  return Math.max(0, Math.min(1, (window.innerHeight - rect.top) / total));
+  return Math.max(0, Math.min(1, (NAV_OFFSET - rect.top) / PIN_SCROLL));
 }
 
 // ── MosaicGrid ────────────────────────────────────────────────────────────────
@@ -247,19 +263,30 @@ export function MosaicGrid() {
     <div
       ref={outerRef}
       style={{
+        // Tall "scroll track" — gives the page extra scroll distance to spend
+        // while the mosaic below stays pinned and reveals more images.
+        position: "relative",
+        height: CONTAINER_H + PIN_SCROLL,
+      }}
+    >
+    <div
+      style={{
+        // The actual mosaic: sticks just below the navbar while you scroll
+        // through the track above, so it's pinned from the very first scroll.
+        position: "sticky",
+        top: NAV_OFFSET,
         height: CONTAINER_H,
         overflow: "hidden",
-        position: "relative",
         display: "flex",
         gap: GAP,
         padding: "0 16px",
         boxSizing: "border-box",
-        // Fade the bottom ~72px of the mosaic to transparent so the images
-        // dissolve into the page background and blend into the About section.
+        // Fade just the bottom ~24px of the mosaic to transparent so the images
+        // dissolve subtly into the page background.
         WebkitMaskImage:
-          "linear-gradient(to bottom, black 0%, black calc(100% - 72px), transparent 100%)",
+          "linear-gradient(to bottom, black 0%, black calc(100% - 24px), transparent 100%)",
         maskImage:
-          "linear-gradient(to bottom, black 0%, black calc(100% - 72px), transparent 100%)",
+          "linear-gradient(to bottom, black 0%, black calc(100% - 24px), transparent 100%)",
       }}
     >
       {COLUMNS.map((images, ci) => (
@@ -279,6 +306,7 @@ export function MosaicGrid() {
                 key={`${ci}-${ii}`}
                 src={img.src}
                 height={img.height}
+                position={img.position}
                 bubble={BUBBLES[img.src]}
                 tileId={`${ci}-${ii}`}
                 activeTouchId={activeTouchId}
@@ -289,6 +317,7 @@ export function MosaicGrid() {
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 }

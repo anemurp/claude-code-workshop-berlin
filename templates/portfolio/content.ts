@@ -19,7 +19,7 @@ export const hero = {
 };
 
 export const about = {
-  heading: "About",
+  heading: "The designer who maps the whole system.",
   paragraphs: [
     "I have 10 years of experience designing dynamic experiences for humans: 5 years designing learning experiences in the classroom, and 5 years as a UX designer working cross-functionally in enterprise companies and early-stage startups.",
     "My distinct background gives me a framework for how people learn, not just how they navigate. This shapes how I run research, how I think about cognitive load, and how I ask forward-looking questions about problems we haven't designed for yet.",
