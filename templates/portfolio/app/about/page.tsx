@@ -9,7 +9,7 @@ export default function AboutPage() {
     <>
       <MosaicGrid />
       <main className="mx-auto max-w-3xl px-6 pb-32 pt-6 mt-6">
-      <h1 className="text-4xl font-bold">{about.heading}</h1>
+      <h1 className="text-4xl font-bold mt-9">{about.heading}</h1>
       <div className="mt-8 space-y-4 text-lg text-ink/80 leading-relaxed">
         {about.paragraphs.map((p, i) => (
           <Fragment key={i}>

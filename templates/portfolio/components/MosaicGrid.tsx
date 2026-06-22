@@ -73,7 +73,6 @@ const SPEEDS = [-350, -310, -430];
 // Nudge every column down a little so the top of the first images isn't clipped.
 const TOP_OFFSET = 24;
 const INITIAL_Y = SPEEDS.map((s) => (s > 0 ? -s : 0) + TOP_OFFSET);
-const CONTAINER_H = 556;
 // How many pixels of scrolling the mosaic stays pinned for while it reveals the
 // next level of images. Bigger = the mosaic stays sticky longer.
 const PIN_SCROLL = 600;
@@ -266,7 +265,9 @@ export function MosaicGrid() {
         // Tall "scroll track" — gives the page extra scroll distance to spend
         // while the mosaic below stays pinned and reveals more images.
         position: "relative",
-        height: CONTAINER_H + PIN_SCROLL,
+        // Inner sticky height (100vh - 56px nav) + PIN_SCROLL (600px reveal),
+        // so the mosaic unpins exactly when the third row finishes revealing.
+        height: "calc(100vh + 544px)",
       }}
     >
     <div
@@ -275,7 +276,7 @@ export function MosaicGrid() {
         // through the track above, so it's pinned from the very first scroll.
         position: "sticky",
         top: NAV_OFFSET,
-        height: CONTAINER_H,
+        height: "calc(100vh - 56px)",
         overflow: "hidden",
         display: "flex",
         gap: GAP,
