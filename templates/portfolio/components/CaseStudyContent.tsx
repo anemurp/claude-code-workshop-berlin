@@ -502,7 +502,7 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
 
         {cs.nextProject && (
           <motion.div
-            className="pt-16 pb-16"
+            className="pt-[120px] pb-[120px]"
             variants={item}
             initial="hidden"
             whileInView="visible"
@@ -560,13 +560,6 @@ export function CaseStudyContent({ cs }: { cs: CaseStudy }) {
             </Link>
           </motion.div>
         )}
-
-        <footer className="py-8 border-t border-navy/10 flex items-center justify-between text-sm text-navy/35">
-          <Link href="/" className="hover:text-navy transition-colors">
-            ← All work
-          </Link>
-          <span>Made with Claude Code · Berlin · 2026</span>
-        </footer>
       </div>
     </div>
   );

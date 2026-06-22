@@ -62,7 +62,7 @@ export function Footer() {
 
       {/* Copyright */}
       <p style={{ color: "rgba(255,255,255,0.18)", fontSize: 11, marginTop: 52, position: "relative", zIndex: 1 }}>
-        Anna Murphy &copy; 2026
+        Made with Claude Code · Berlin · 2026
       </p>
 
       {/* Butterfly — bottom right corner */}
